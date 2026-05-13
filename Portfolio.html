@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samuel Coquitte — Dev</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050508;
+    --surface: #0d0d14;
+    --card: #111119;
+    --border: #1e1e2e;
+    --accent: #7c3aed;
+    --accent2: #06b6d4;
+    --accent3: #f59e0b;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --glow: rgba(124,58,237,0.4);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Syne',sans-serif;
+    overflow-x:hidden;
+    cursor:none;
+  }
+
+  /* CURSOR */
+  .cursor{
+    position:fixed;width:12px;height:12px;border-radius:50%;
+    background:var(--accent);pointer-events:none;z-index:9999;
+    transition:transform .1s;mix-blend-mode:screen;
+  }
+  .cursor-ring{
+    position:fixed;width:36px;height:36px;border-radius:50%;
+    border:1px solid var(--accent2);pointer-events:none;z-index:9998;
+    transition:transform .15s, opacity .3s;opacity:.6;
+  }
+
+  /* NOISE OVERLAY */
+  body::before{
+    content:'';position:fixed;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none;z-index:0;opacity:.5;
+  }
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;width:100%;z-index:100;
+    padding:1.2rem 3rem;
+    display:flex;justify-content:space-between;align-items:center;
+    backdrop-filter:blur(20px);
+    background:rgba(5,5,8,.7);
+    border-bottom:1px solid var(--border);
+  }
+  .logo{
+    font-family:'Space Mono',monospace;font-size:.85rem;
+    color:var(--accent2);letter-spacing:.1em;
+  }
+  .logo span{color:var(--accent);}
+  .nav-links{display:flex;gap:2rem;}
+  .nav-links a{
+    color:var(--muted);text-decoration:none;font-size:.8rem;
+    letter-spacing:.15em;text-transform:uppercase;font-weight:600;
+    transition:color .3s;
+  }
+  .nav-links a:hover{color:var(--accent2);}
+
+  /* HERO */
+  #hero{
+    min-height:100vh;display:flex;align-items:center;
+    padding:8rem 3rem 4rem;position:relative;overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background:radial-gradient(ellipse 60% 60% at 70% 50%, rgba(124,58,237,.12) 0%, transparent 70%),
+               radial-gradient(ellipse 40% 40% at 30% 80%, rgba(6,182,212,.08) 0%, transparent 60%);
+  }
+  .grid-lines{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(124,58,237,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,.05) 1px, transparent 1px);
+    background-size:60px 60px;
+    mask-image:radial-gradient(ellipse at center, black 40%, transparent 80%);
+  }
+  .hero-content{position:relative;z-index:1;max-width:900px;}
+  .hero-tag{
+    display:inline-block;
+    font-family:'Space Mono',monospace;font-size:.7rem;
+    color:var(--accent2);letter-spacing:.2em;text-transform:uppercase;
+    padding:.3rem .8rem;border:1px solid var(--accent2);
+    margin-bottom:2rem;opacity:0;animation:fadeUp .6s .2s forwards;
+  }
+  h1{
+    font-size:clamp(3.5rem,8vw,7rem);font-weight:800;line-height:.95;
+    opacity:0;animation:fadeUp .7s .4s forwards;
+  }
+  h1 .first{display:block;color:var(--text);}
+  h1 .last{
+    display:block;
+    -webkit-text-stroke:1px var(--accent);
+    color:transparent;
+    position:relative;
+  }
+  h1 .last::after{
+    content:attr(data-text);
+    position:absolute;left:0;
+    color:var(--accent);
+    clip-path:inset(0 100% 0 0);
+    animation:reveal 1.2s 1.2s forwards;
+  }
+  @keyframes reveal{to{clip-path:inset(0 0% 0 0);}}
+  .hero-desc{
+    margin-top:1.5rem;max-width:480px;
+    color:var(--muted);font-size:1rem;line-height:1.7;
+    opacity:0;animation:fadeUp .7s .7s forwards;
+  }
+  .hero-cta{
+    margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;
+    opacity:0;animation:fadeUp .7s .9s forwards;
+  }
+  .btn{
+    padding:.75rem 1.8rem;font-family:'Space Mono',monospace;
+    font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
+    text-decoration:none;border:none;cursor:none;transition:all .3s;
+  }
+  .btn-primary{
+    background:var(--accent);color:#fff;
+    clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-primary:hover{background:#6d28d9;box-shadow:0 0 30px var(--glow);}
+  .btn-outline{
+    background:transparent;color:var(--text);
+    border:1px solid var(--border);
+    clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-outline:hover{border-color:var(--accent2);color:var(--accent2);}
+
+  /* STATUS BADGE */
+  .status{
+    position:absolute;right:3rem;bottom:4rem;
+    display:flex;align-items:center;gap:.6rem;
+    font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);
+    opacity:0;animation:fadeUp .7s 1.1s forwards;
+  }
+  .dot{
+    width:8px;height:8px;border-radius:50%;background:#22c55e;
+    box-shadow:0 0 10px #22c55e;
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+  /* SECTIONS */
+  section{padding:6rem 3rem;position:relative;}
+  .section-label{
+    font-family:'Space Mono',monospace;font-size:.7rem;
+    color:var(--accent);letter-spacing:.25em;text-transform:uppercase;
+    margin-bottom:.8rem;
+    display:flex;align-items:center;gap:.8rem;
+  }
+  .section-label::after{
+    content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);
+  }
+  h2{font-size:clamp(2rem,4vw,3.5rem);font-weight:800;margin-bottom:3rem;}
+
+  /* ABOUT */
+  #about{background:var(--surface);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+  .about-text p{color:var(--muted);line-height:1.8;margin-bottom:1rem;}
+  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+  .stat{
+    padding:1.5rem;border:1px solid var(--border);
+    background:var(--card);
+    clip-path:polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition:border-color .3s;
+  }
+  .stat:hover{border-color:var(--accent);}
+  .stat-num{
+    font-size:2.5rem;font-weight:800;color:var(--accent);
+    font-family:'Space Mono',monospace;line-height:1;
+  }
+  .stat-label{font-size:.8rem;color:var(--muted);margin-top:.3rem;letter-spacing:.05em;}
+
+  /* SKILLS */
+  #skills{background:var(--bg);}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
+  .skill-card{
+    padding:1.8rem;border:1px solid var(--border);
+    background:var(--card);transition:all .3s;
+    clip-path:polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+    position:relative;overflow:hidden;
+  }
+  .skill-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent),transparent);
+    transform:scaleX(0);transition:.3s;
+  }
+  .skill-card:hover::before{transform:scaleX(1);}
+  .skill-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.5);}
+  .skill-cat{
+    font-size:.65rem;font-family:'Space Mono',monospace;
+    color:var(--accent2);letter-spacing:.2em;text-transform:uppercase;
+    margin-bottom:1rem;
+  }
+  .skill-card h3{font-size:1rem;font-weight:700;margin-bottom:.8rem;}
+  .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem;}
+  .tag{
+    padding:.25rem .6rem;font-size:.7rem;font-family:'Space Mono',monospace;
+    border:1px solid var(--border);color:var(--muted);
+    background:rgba(124,58,237,.05);transition:all .2s;
+  }
+  .tag:hover{border-color:var(--accent);color:var(--accent);}
+
+  /* EXPERIENCE */
+  #experience{background:var(--surface);}
+  .exp-timeline{display:flex;flex-direction:column;gap:0;}
+  .exp-item{
+    display:grid;grid-template-columns:160px 1px 1fr;
+    gap:0 2rem;position:relative;
+  }
+  .exp-date{
+    font-family:'Space Mono',monospace;font-size:.75rem;
+    color:var(--accent);text-align:right;padding-top:1.5rem;
+    letter-spacing:.05em;
+  }
+  .exp-line{
+    display:flex;flex-direction:column;align-items:center;
+    position:relative;
+  }
+  .exp-dot{
+    width:14px;height:14px;border-radius:50%;
+    border:2px solid var(--accent);background:var(--bg);
+    margin-top:1.7rem;flex-shrink:0;position:relative;z-index:1;
+    box-shadow:0 0 15px var(--glow);
+  }
+  .exp-connector{flex:1;width:1px;background:linear-gradient(var(--border),transparent);min-height:40px;}
+  .exp-content{
+    padding:1.5rem 0 3rem;
+  }
+  .exp-company{
+    font-size:.7rem;font-family:'Space Mono',monospace;
+    color:var(--accent2);letter-spacing:.15em;text-transform:uppercase;
+    margin-bottom:.3rem;
+  }
+  .exp-title{font-size:1.2rem;font-weight:700;margin-bottom:.8rem;}
+  .exp-desc{color:var(--muted);font-size:.9rem;line-height:1.7;}
+  .exp-tools{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem;}
+  .tool-tag{
+    padding:.2rem .5rem;font-size:.65rem;font-family:'Space Mono',monospace;
+    background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);
+    color:var(--accent);
+  }
+
+  /* FORMATION */
+  #formation{background:var(--bg);}
+  .edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+  .edu-card{
+    padding:2rem;border:1px solid var(--border);background:var(--card);
+    position:relative;overflow:hidden;transition:all .3s;
+  }
+  .edu-card::after{
+    content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    transform:scaleX(0);transform-origin:left;transition:.4s;
+  }
+  .edu-card:hover::after{transform:scaleX(1);}
+  .edu-card:hover{border-color:var(--border);box-shadow:0 20px 50px rgba(0,0,0,.6);}
+  .edu-year{
+    font-family:'Space Mono',monospace;font-size:.7rem;
+    color:var(--accent3);margin-bottom:.8rem;letter-spacing:.1em;
+  }
+  .edu-card h3{font-size:1rem;font-weight:700;margin-bottom:.4rem;}
+  .edu-school{font-size:.85rem;color:var(--muted);}
+  .edu-badge{
+    position:absolute;top:1.5rem;right:1.5rem;
+    width:32px;height:32px;border-radius:50%;
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    font-size:.8rem;
+  }
+
+  /* CONTACT */
+  #contact{
+    background:var(--surface);
+    text-align:center;
+  }
+  .contact-inner{max-width:600px;margin:0 auto;}
+  .contact-inner p{color:var(--muted);margin-bottom:2.5rem;line-height:1.7;}
+  .contact-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2rem;}
+  .contact-link{
+    display:flex;align-items:center;gap:.6rem;
+    padding:.8rem 1.5rem;border:1px solid var(--border);
+    color:var(--text);text-decoration:none;font-family:'Space Mono',monospace;
+    font-size:.75rem;transition:all .3s;
+  }
+  .contact-link:hover{border-color:var(--accent2);color:var(--accent2);}
+  .contact-big{
+    display:block;font-size:clamp(1.5rem,4vw,3rem);
+    font-weight:800;color:var(--accent);
+    text-decoration:none;
+    letter-spacing:-.02em;
+    margin-bottom:.5rem;
+    transition:color .3s;
+  }
+  .contact-big:hover{color:var(--accent2);}
+
+  /* FOOTER */
+  footer{
+    padding:2rem 3rem;border-top:1px solid var(--border);
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);
+  }
+
+  /* INTERESTS */
+  .interests{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;}
+  .interest{
+    padding:.6rem 1.2rem;border:1px solid var(--border);
+    font-size:.8rem;color:var(--muted);
+    display:flex;align-items:center;gap:.5rem;
+    transition:all .3s;
+  }
+  .interest:hover{border-color:var(--accent3);color:var(--accent3);}
+
+  /* SCROLL INDICATOR */
+  .scroll-hint{
+    position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+    font-family:'Space Mono',monospace;font-size:.65rem;
+    color:var(--muted);letter-spacing:.2em;text-transform:uppercase;
+    display:flex;flex-direction:column;align-items:center;gap:.5rem;
+    opacity:0;animation:fadeUp .7s 1.5s forwards;
+  }
+  .scroll-line{
+    width:1px;height:40px;
+    background:linear-gradient(var(--accent),transparent);
+    animation:scrollLine 1.5s infinite;
+  }
+  @keyframes scrollLine{
+    0%{transform:scaleY(0);transform-origin:top;}
+    50%{transform:scaleY(1);transform-origin:top;}
+    51%{transform:scaleY(1);transform-origin:bottom;}
+    100%{transform:scaleY(0);transform-origin:bottom;}
+  }
+
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  /* LANG */
+  .lang-bar{display:flex;flex-direction:column;gap:.8rem;margin-top:1rem;}
+  .lang-row{display:flex;align-items:center;gap:1rem;}
+  .lang-name{width:80px;font-size:.8rem;font-family:'Space Mono',monospace;color:var(--muted);}
+  .lang-track{flex:1;height:3px;background:var(--border);border-radius:2px;}
+  .lang-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+  .lang-level{font-size:.7rem;color:var(--muted);font-family:'Space Mono',monospace;}
+
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem;}
+    .nav-links{gap:1rem;}
+    section{padding:4rem 1.5rem;}
+    #hero{padding:6rem 1.5rem 4rem;}
+    .about-grid{grid-template-columns:1fr;}
+    .exp-item{grid-template-columns:90px 1px 1fr;}
+    footer{flex-direction:column;gap:.5rem;text-align:center;}
+    .status{right:1.5rem;}
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<nav>
+  <div class="logo"><span>//</span> samuel.coquitte</div>
+  <div class="nav-links">
+    <a href="#about">Profil</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">XP</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-tag">BTS SIO · Option SLAM · 2026</div>
+    <h1>
+      <span class="first">Samuel</span>
+      <span class="last" data-text="Coquitte">Coquitte</span>
+    </h1>
+    <p class="hero-desc">
+      Développeur full-stack en formation, passionné par la création d'applications mobiles et web. Autonome, déterminé, team-player.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">Voir mes expériences</a>
+      <a href="#contact" class="btn btn-outline">Me contacter</a>
+    </div>
+  </div>
+  <div class="status">
+    <div class="dot"></div>
+    Disponible pour opportunités
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 — Profil</div>
+  <h2>Qui suis-je</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Étudiant en 2ème année de BTS SIO option SLAM au Lycée Monnet-Mermoz d'Aurillac, je développe des compétences solides en développement d'applications mobiles et web.</p>
+      <p>J'ai eu l'opportunité de travailler sur des projets concrets en stage — de la création d'une application mobile avec chatbot à des solutions Power Apps pour la SNCF. J'aime transformer des problèmes réels en solutions digitales propres et efficaces.</p>
+      <div class="lang-bar">
+        <div class="lang-row">
+          <span class="lang-name">Français</span>
+          <div class="lang-track"><div class="lang-fill" style="width:100%"></div></div>
+          <span class="lang-level">Natif</span>
+        </div>
+        <div class="lang-row">
+          <span class="lang-name">Anglais</span>
+          <div class="lang-track"><div class="lang-fill" style="width:55%"></div></div>
+          <span class="lang-level">B1</span>
+        </div>
+      </div>
+      <div class="interests">
+        <div class="interest">🥊 Boxe en club</div>
+        <div class="interest">💪 Gym & Musculation</div>
+      </div>
+    </div>
+    <div class="about-stats">
+      <div class="stat">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Stages réalisés</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Langages maîtrisés</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">BTS</div>
+        <div class="stat-label">SIO SLAM · 2026</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2+</div>
+        <div class="stat-label">Ans de formation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">02 — Compétences</div>
+  <h2>Stack technique</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-cat">Langages</div>
+      <h3>Core Languages</h3>
+      <div class="tags">
+        <span class="tag">JavaScript</span><span class="tag">TypeScript</span>
+        <span class="tag">Python</span><span class="tag">C#</span>
+        <span class="tag">Java</span><span class="tag">PHP</span>
+        <span class="tag">SQL</span><span class="tag">C</span>
+        <span class="tag">Arduino</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Frontend</div>
+      <h3>Interfaces & UI</h3>
+      <div class="tags">
+        <span class="tag">Angular</span><span class="tag">HTML5</span>
+        <span class="tag">CSS3</span><span class="tag">React Native</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Backend & Base de données</div>
+      <h3>Serveur & Data</h3>
+      <div class="tags">
+        <span class="tag">Node.js</span><span class="tag">Symfony</span>
+        <span class="tag">PostgreSQL</span><span class="tag">RESTful API</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Outils & DevOps</div>
+      <h3>Environnement</h3>
+      <div class="tags">
+        <span class="tag">Git</span><span class="tag">GitLab</span>
+        <span class="tag">Linux</span><span class="tag">Bash</span>
+        <span class="tag">PowerShell</span><span class="tag">Terminal</span>
+        <span class="tag">Scrum</span><span class="tag">Regex</span>
+        <span class="tag">ELK</span><span class="tag">JUnit</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Microsoft</div>
+      <h3>Power Platform</h3>
+      <div class="tags">
+        <span class="tag">Power Apps</span><span class="tag">SharePoint</span>
+        <span class="tag">Power Automate</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Créatif</div>
+      <h3>Adobe & 3D</h3>
+      <div class="tags">
+        <span class="tag">Photoshop</span><span class="tag">Premiere Pro</span>
+        <span class="tag">After Effects</span><span class="tag">Illustrator</span>
+        <span class="tag">InDesign</span><span class="tag">XD</span>
+        <span class="tag">Blender</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">03 — Expériences</div>
+  <h2>Stages</h2>
+  <div class="exp-timeline">
+    <div class="exp-item">
+      <div class="exp-date">2026</div>
+      <div class="exp-line">
+        <div class="exp-dot"></div>
+        <div class="exp-connector"></div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-company">SNCF</div>
+        <div class="exp-title">Stage — Développeur Power Apps</div>
+        <p class="exp-desc">
+          Développement de plusieurs applications internes dont une solution complète de gestion de stock pour un mini-magasin. Conception de l'interface, structuration des données et automatisation des processus métier.
+        </p>
+        <div class="exp-tools">
+          <span class="tool-tag">Power Apps</span>
+          <span class="tool-tag">SharePoint</span>
+          <span class="tool-tag">Power Automate</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">2025</div>
+      <div class="exp-line">
+        <div class="exp-dot"></div>
+        <div class="exp-connector"></div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-company">École de la 2ème Chance</div>
+        <div class="exp-title">Stage — Développeur Application Mobile</div>
+        <p class="exp-desc">
+          Création d'une application APK de lexique complète avec narrateurs intégrés et chatbot conversationnel. Conception de l'expérience utilisateur et intégration de technologies Text-to-Speech.
+        </p>
+        <div class="exp-tools">
+          <span class="tool-tag">TypeScript</span>
+          <span class="tool-tag">JSON</span>
+          <span class="tool-tag">TTS</span>
+          <span class="tool-tag">No-code</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATION -->
+<section id="formation">
+  <div class="section-label">04 — Formation</div>
+  <h2>Parcours</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-badge">🎓</div>
+      <div class="edu-year">2025 – 2026 · En cours</div>
+      <h3>BTS SIO — Option SLAM</h3>
+      <div class="edu-school">Lycée Monnet-Mermoz · Aurillac (15)</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-badge">📘</div>
+      <div class="edu-year">2024</div>
+      <h3>Baccalauréat STI2D</h3>
+      <div class="edu-school">Option SIN · Lycée Monnet-Mermoz (15)</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-badge">📗</div>
+      <div class="edu-year">2020</div>
+      <h3>Brevet des Collèges</h3>
+      <div class="edu-school">Collège Val de Senouire (43)</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projets" style="background:var(--bg);">
+  <div class="section-label">05 — Projets GitLab</div>
+  <h2>Activités de cours</h2>
+
+  <div style="display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.5rem;">
+    <button class="filter-btn active" data-cat="all">Tous</button>
+    <button class="filter-btn" data-cat="securite">Sécurité</button>
+    <button class="filter-btn" data-cat="systeme">Système & Scripting</button>
+    <button class="filter-btn" data-cat="web">Web</button>
+    <button class="filter-btn" data-cat="java">Java & POO</button>
+    <button class="filter-btn" data-cat="bdd">BDD & API</button>
+    <button class="filter-btn" data-cat="divers">Divers</button>
+  </div>
+
+  <div class="projects-grid" id="projectsGrid">
+
+    <!-- SECURITE -->
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/mysql-bruteforce" target="_blank" class="proj-card" data-cat="securite">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span>
+        <span class="proj-date">Sep 2024</span>
+      </div>
+      <h3 class="proj-title">mysql-bruteforce</h3>
+      <p class="proj-desc">Test de robustesse par bruteforce sur une base MySQL — notions d'attaque par dictionnaire.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">MySQL</span><span class="proj-tag">Sécurité</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b3m3-token" target="_blank" class="proj-card" data-cat="securite">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span>
+        <span class="proj-date">Fév 2025</span>
+      </div>
+      <h3 class="proj-title">b3m3-token</h3>
+      <p class="proj-desc">Gestion de tokens d'authentification — sécurisation des accès et sessions.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">Auth</span><span class="proj-tag">Token</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b3m4-volauth" target="_blank" class="proj-card" data-cat="securite">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span>
+        <span class="proj-date">Mar 2025</span>
+      </div>
+      <h3 class="proj-title">b3m4-volauth</h3>
+      <p class="proj-desc">Étude et simulation de vol de session / authentification — failles et contre-mesures.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">Session</span><span class="proj-tag">Sécurité</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m13-juice-shop-groupe1" target="_blank" class="proj-card" data-cat="securite">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span>
+        <span class="proj-date">Mar 2025</span>
+      </div>
+      <h3 class="proj-title">juice-shop — groupe 1</h3>
+      <p class="proj-desc">OWASP Juice Shop — exploitation de vulnérabilités web classiques (XSS, SQLi, IDOR…).</p>
+      <div class="proj-footer">
+        <span class="proj-tag">OWASP</span><span class="proj-tag">Pentest</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m13-juice-shop-groupe2" target="_blank" class="proj-card" data-cat="securite">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span>
+        <span class="proj-date">Avr 2025</span>
+      </div>
+      <h3 class="proj-title">juice-shop — groupe 2</h3>
+      <p class="proj-desc">Suite de l'exploitation Juice Shop avec un second groupe — scénarios d'attaque avancés.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">OWASP</span><span class="proj-tag">Pentest</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m12-scrapingosint" target="_blank" class="proj-card" data-cat="securite">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span>
+        <span class="proj-date">Mar 2025</span>
+      </div>
+      <h3 class="proj-title">b2m12-ScrapingOSINT</h3>
+      <p class="proj-desc">Scraping et renseignement en sources ouvertes (OSINT) — collecte et analyse de données publiques.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">Python</span><span class="proj-tag">OSINT</span><span class="proj-tag">Scraping</span>
+      </div>
+    </a>
+
+    <!-- SYSTEME & SCRIPTING -->
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m3-bash" target="_blank" class="proj-card" data-cat="systeme">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.3);">Système</span>
+        <span class="proj-date">Sep 2024</span>
+      </div>
+      <h3 class="proj-title">b1m3-bash</h3>
+      <p class="proj-desc">Scripting Bash — automatisation de tâches système, manipulation de fichiers et processus.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">Bash</span><span class="proj-tag">Linux</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b3m1-langage-c" target="_blank" class="proj-card" data-cat="systeme">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.3);">Système</span>
+        <span class="proj-date">Oct 2024</span>
+      </div>
+      <h3 class="proj-title">b3m1-langage-c</h3>
+      <p class="proj-desc">Programmation en C — gestion de la mémoire, pointeurs, structures de données bas niveau.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">C</span><span class="proj-tag">Système</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m9-scriptinglogs" target="_blank" class="proj-card" data-cat="systeme">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.3);">Système</span>
+        <span class="proj-date">Mar 2025</span>
+      </div>
+      <h3 class="proj-title">b1m9-scriptinglogs</h3>
+      <p class="proj-desc">Scripting pour l'analyse et la supervision de logs système — parsing et alertes automatiques.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">Bash</span><span class="proj-tag">ELK</span><span class="proj-tag">Logs</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m10-powershell" target="_blank" class="proj-card" data-cat="systeme">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.3);">Système</span>
+        <span class="proj-date">Avr 2025</span>
+      </div>
+      <h3 class="proj-title">b1m10-powershell</h3>
+      <p class="proj-desc">Scripting PowerShell — administration Windows, automatisation et gestion des services.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">PowerShell</span><span class="proj-tag">Windows</span>
+      </div>
+    </a>
+
+    <!-- WEB -->
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m4-html-css" target="_blank" class="proj-card" data-cat="web">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(6,182,212,.15);color:#22d3ee;border-color:rgba(6,182,212,.3);">Web</span>
+        <span class="proj-date">Sep 2024</span>
+      </div>
+      <h3 class="proj-title">b1m4-html-css</h3>
+      <p class="proj-desc">Fondamentaux HTML5 & CSS3 — mise en page, responsive design et animations CSS.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">HTML5</span><span class="proj-tag">CSS3</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/ap-wordpress" target="_blank" class="proj-card" data-cat="web">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(6,182,212,.15);color:#22d3ee;border-color:rgba(6,182,212,.3);">Web</span>
+        <span class="proj-date">Sep 2024</span>
+      </div>
+      <h3 class="proj-title">ap-wordpress</h3>
+      <p class="proj-desc">Création et personnalisation d'un site WordPress — thèmes, plugins et gestion de contenu.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">WordPress</span><span class="proj-tag">PHP</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m5-javascript" target="_blank" class="proj-card" data-cat="web">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(6,182,212,.15);color:#22d3ee;border-color:rgba(6,182,212,.3);">Web</span>
+        <span class="proj-date">Nov 2024</span>
+      </div>
+      <h3 class="proj-title">b1m5-Javascript</h3>
+      <p class="proj-desc">JavaScript ES6+ — manipulation du DOM, événements, fetch API et programmation asynchrone.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">JavaScript</span><span class="proj-tag">DOM</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b3m2-http" target="_blank" class="proj-card" data-cat="web">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(6,182,212,.15);color:#22d3ee;border-color:rgba(6,182,212,.3);">Web</span>
+        <span class="proj-date">Jan 2025</span>
+      </div>
+      <h3 class="proj-title">b3m2-http</h3>
+      <p class="proj-desc">Protocole HTTP — requêtes, réponses, headers, méthodes REST et communication client-serveur.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">HTTP</span><span class="proj-tag">REST</span>
+      </div>
+    </a>
+
+    <!-- JAVA & POO -->
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b1m1-java-tu" target="_blank" class="proj-card" data-cat="java">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">Java</span>
+        <span class="proj-date">Jan 2025</span>
+      </div>
+      <h3 class="proj-title">b2m1-java-tu</h3>
+      <p class="proj-desc">Tests unitaires Java avec JUnit — TDD, assertions, couverture de code et qualité logicielle.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">Java</span><span class="proj-tag">JUnit</span><span class="proj-tag">TDD</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m3-poo" target="_blank" class="proj-card" data-cat="java">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">Java</span>
+        <span class="proj-date">Fév 2025</span>
+      </div>
+      <h3 class="proj-title">b2m3-poo</h3>
+      <p class="proj-desc">Programmation Orientée Objet en Java — héritage, polymorphisme, interfaces et design patterns.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">Java</span><span class="proj-tag">POO</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m4-arraylist" target="_blank" class="proj-card" data-cat="java">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">Java</span>
+        <span class="proj-date">Fév 2025</span>
+      </div>
+      <h3 class="proj-title">b2m4-ArrayList</h3>
+      <p class="proj-desc">Collections Java — ArrayList, manipulation de listes dynamiques et algorithmes de tri.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">Java</span><span class="proj-tag">Collections</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m4-dictionnaire" target="_blank" class="proj-card" data-cat="java">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">Java</span>
+        <span class="proj-date">Mar 2025</span>
+      </div>
+      <h3 class="proj-title">b2m4-dictionnaire</h3>
+      <p class="proj-desc">Structure de données dictionnaire en Java — HashMap, recherche et gestion de paires clé-valeur.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">Java</span><span class="proj-tag">HashMap</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/apm7-csharp" target="_blank" class="proj-card" data-cat="java">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">C#</span>
+        <span class="proj-date">Fév 2025</span>
+      </div>
+      <h3 class="proj-title">apm7-csharp</h3>
+      <p class="proj-desc">Introduction au C# — syntaxe, POO .NET, et développement d'applications console.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">C#</span><span class="proj-tag">.NET</span>
+      </div>
+    </a>
+
+    <!-- BDD & API -->
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m6-sql" target="_blank" class="proj-card" data-cat="bdd">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(124,58,237,.15);color:#a78bfa;border-color:rgba(124,58,237,.3);">BDD</span>
+        <span class="proj-date">Déc 2024</span>
+      </div>
+      <h3 class="proj-title">b1m6-SQL</h3>
+      <p class="proj-desc">Langage SQL — requêtes SELECT, jointures, agrégats, sous-requêtes et optimisation.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">SQL</span><span class="proj-tag">PostgreSQL</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m5-nasa" target="_blank" class="proj-card" data-cat="bdd">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(124,58,237,.15);color:#a78bfa;border-color:rgba(124,58,237,.3);">API</span>
+        <span class="proj-date">Mar 2025</span>
+      </div>
+      <h3 class="proj-title">b2m5-nasa</h3>
+      <p class="proj-desc">Consommation de l'API NASA — récupération d'images astronomiques et données spatiales en temps réel.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">API REST</span><span class="proj-tag">NASA</span><span class="proj-tag">JS</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m6-transacs" target="_blank" class="proj-card" data-cat="bdd">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(124,58,237,.15);color:#a78bfa;border-color:rgba(124,58,237,.3);">BDD</span>
+        <span class="proj-date">Avr 2025</span>
+      </div>
+      <h3 class="proj-title">b2m6-transacs</h3>
+      <p class="proj-desc">Transactions SQL — ACID, gestion de la concurrence, rollback et intégrité des données.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">SQL</span><span class="proj-tag">Transactions</span><span class="proj-tag">ACID</span>
+      </div>
+    </a>
+
+    <!-- DIVERS -->
+    <a href="https://gitlab.sio-aurillac.fr/scoquitte/ProjetTP" target="_blank" class="proj-card" data-cat="divers">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(236,72,153,.15);color:#f472b6;border-color:rgba(236,72,153,.3);">Perso</span>
+        <span class="proj-date">Fév 2025</span>
+      </div>
+      <h3 class="proj-title">ProjetTP</h3>
+      <p class="proj-desc">Projet personnel créé via l'API GitLab avec Postman — tests d'intégration et automatisation CI.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">Postman</span><span class="proj-tag">API GitLab</span>
+      </div>
+    </a>
+
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b3m12-revisions" target="_blank" class="proj-card" data-cat="divers">
+      <div class="proj-top">
+        <span class="proj-lang" style="background:rgba(236,72,153,.15);color:#f472b6;border-color:rgba(236,72,153,.3);">Révisions</span>
+        <span class="proj-date">2025</span>
+      </div>
+      <h3 class="proj-title">b3m12-revisions</h3>
+      <p class="proj-desc">Module de révisions consolidant les acquis de 2 ans de formation BTS SIO SLAM.</p>
+      <div class="proj-footer">
+        <span class="proj-tag">Full Stack</span><span class="proj-tag">BTS SIO</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<style>
+.filter-btn{
+  padding:.4rem 1rem;font-family:'Space Mono',monospace;font-size:.68rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:transparent;border:1px solid var(--border);
+  color:var(--muted);cursor:none;transition:all .25s;
+}
+.filter-btn:hover,.filter-btn.active{
+  border-color:var(--accent);color:var(--accent);
+  background:rgba(124,58,237,.1);
+}
+.projects-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1rem;
+}
+.proj-card{
+  display:flex;flex-direction:column;
+  padding:1.5rem;border:1px solid var(--border);
+  background:var(--card);text-decoration:none;color:var(--text);
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.proj-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(124,58,237,.05),transparent);
+  opacity:0;transition:.3s;
+}
+.proj-card:hover::before{opacity:1;}
+.proj-card:hover{
+  border-color:var(--accent);
+  transform:translateY(-3px);
+  box-shadow:0 15px 40px rgba(0,0,0,.5);
+}
+.proj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;}
+.proj-lang{
+  font-size:.6rem;font-family:'Space Mono',monospace;letter-spacing:.12em;
+  text-transform:uppercase;padding:.2rem .5rem;border:1px solid;
+}
+.proj-date{font-size:.65rem;color:var(--muted);font-family:'Space Mono',monospace;}
+.proj-title{font-size:.95rem;font-weight:700;margin-bottom:.5rem;font-family:'Space Mono',monospace;}
+.proj-desc{font-size:.82rem;color:var(--muted);line-height:1.6;flex:1;}
+.proj-footer{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:1rem;}
+.proj-tag{
+  font-size:.6rem;font-family:'Space Mono',monospace;
+  padding:.15rem .45rem;border:1px solid var(--border);color:var(--muted);
+}
+.proj-card.hidden{display:none;}
+</style>
+
+<script>
+(function(){
+  const btns=document.querySelectorAll('.filter-btn');
+  const cards=document.querySelectorAll('.proj-card');
+  btns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      btns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat=btn.dataset.cat;
+      cards.forEach(c=>{
+        c.classList.toggle('hidden', cat!=='all' && c.dataset.cat!==cat);
+      });
+    });
+  });
+})();
+</script>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label" style="justify-content:center;">05 — Contact</div>
+    <h2>On travaille ensemble ?</h2>
+    <p>Disponible pour des alternances, stages ou projets freelance. N'hésitez pas à me contacter.</p>
+    <a href="mailto:samuelcoquitte0@gmail.com" class="contact-big">samuelcoquitte0@gmail.com</a>
+    <div class="contact-links">
+      <a href="tel:+33618309368" class="contact-link">
+        📞 06 18 30 93 68
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Samuel Coquitte</span>
+  <span>BTS SIO · SLAM · Aurillac</span>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    cursor.style.left=mx-6+'px';cursor.style.top=my-6+'px';
+  });
+  (function anim(){
+    rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+    ring.style.left=rx-18+'px';ring.style.top=ry-18+'px';
+    requestAnimationFrame(anim);
+  })();
+  document.querySelectorAll('a,button,.btn').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{
+      cursor.style.transform='scale(2.5)';
+      ring.style.opacity='0';
+    });
+    el.addEventListener('mouseleave',()=>{
+      cursor.style.transform='scale(1)';
+      ring.style.opacity='.6';
+    });
+  });
+
+  // Scroll reveal
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.style.opacity='1';
+        e.target.style.transform='translateY(0)';
+      }
+    });
+  },{threshold:.1});
+
+  document.querySelectorAll('.skill-card,.edu-card,.stat,.exp-item,.interest').forEach(el=>{
+    el.style.opacity='0';
+    el.style.transform='translateY(30px)';
+    el.style.transition='opacity .6s, transform .6s';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
