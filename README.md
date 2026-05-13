@@ -1,2 +1,0 @@
-# samcoportfolio
-Portfolio BTS SIO
