@@ -28,329 +28,111 @@
     cursor:none;
   }
 
-  /* CURSOR */
-  .cursor{
-    position:fixed;width:12px;height:12px;border-radius:50%;
-    background:var(--accent);pointer-events:none;z-index:9999;
-    transition:transform .1s;mix-blend-mode:screen;
-  }
-  .cursor-ring{
-    position:fixed;width:36px;height:36px;border-radius:50%;
-    border:1px solid var(--accent2);pointer-events:none;z-index:9998;
-    transition:transform .15s, opacity .3s;opacity:.6;
-  }
+  .cursor{position:fixed;width:12px;height:12px;border-radius:50%;background:var(--accent);pointer-events:none;z-index:9999;transition:transform .1s;mix-blend-mode:screen;}
+  .cursor-ring{position:fixed;width:36px;height:36px;border-radius:50%;border:1px solid var(--accent2);pointer-events:none;z-index:9998;transition:transform .15s, opacity .3s;opacity:.6;}
 
-  /* NOISE OVERLAY */
-  body::before{
-    content:'';position:fixed;inset:0;
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events:none;z-index:0;opacity:.5;
-  }
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
 
-  /* NAV */
-  nav{
-    position:fixed;top:0;width:100%;z-index:100;
-    padding:1.2rem 3rem;
-    display:flex;justify-content:space-between;align-items:center;
-    backdrop-filter:blur(20px);
-    background:rgba(5,5,8,.7);
-    border-bottom:1px solid var(--border);
-  }
-  .logo{
-    font-family:'Space Mono',monospace;font-size:.85rem;
-    color:var(--accent2);letter-spacing:.1em;
-  }
+  nav{position:fixed;top:0;width:100%;z-index:100;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);background:rgba(5,5,8,.7);border-bottom:1px solid var(--border);}
+  .logo{font-family:'Space Mono',monospace;font-size:.85rem;color:var(--accent2);letter-spacing:.1em;}
   .logo span{color:var(--accent);}
   .nav-links{display:flex;gap:2rem;}
-  .nav-links a{
-    color:var(--muted);text-decoration:none;font-size:.8rem;
-    letter-spacing:.15em;text-transform:uppercase;font-weight:600;
-    transition:color .3s;
-  }
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;transition:color .3s;}
   .nav-links a:hover{color:var(--accent2);}
 
-  /* HERO */
-  #hero{
-    min-height:100vh;display:flex;align-items:center;
-    padding:8rem 3rem 4rem;position:relative;overflow:hidden;
-  }
-  .hero-bg{
-    position:absolute;inset:0;
-    background:radial-gradient(ellipse 60% 60% at 70% 50%, rgba(124,58,237,.12) 0%, transparent 70%),
-               radial-gradient(ellipse 40% 40% at 30% 80%, rgba(6,182,212,.08) 0%, transparent 60%);
-  }
-  .grid-lines{
-    position:absolute;inset:0;
-    background-image:
-      linear-gradient(rgba(124,58,237,.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(124,58,237,.05) 1px, transparent 1px);
-    background-size:60px 60px;
-    mask-image:radial-gradient(ellipse at center, black 40%, transparent 80%);
-  }
+  #hero{min-height:100vh;display:flex;align-items:center;padding:8rem 3rem 4rem;position:relative;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 70% 50%, rgba(124,58,237,.12) 0%, transparent 70%),radial-gradient(ellipse 40% 40% at 30% 80%, rgba(6,182,212,.08) 0%, transparent 60%);}
+  .grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(124,58,237,.05) 1px, transparent 1px),linear-gradient(90deg, rgba(124,58,237,.05) 1px, transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center, black 40%, transparent 80%);}
   .hero-content{position:relative;z-index:1;max-width:900px;}
-  .hero-tag{
-    display:inline-block;
-    font-family:'Space Mono',monospace;font-size:.7rem;
-    color:var(--accent2);letter-spacing:.2em;text-transform:uppercase;
-    padding:.3rem .8rem;border:1px solid var(--accent2);
-    margin-bottom:2rem;opacity:0;animation:fadeUp .6s .2s forwards;
-  }
-  h1{
-    font-size:clamp(3.5rem,8vw,7rem);font-weight:800;line-height:.95;
-    opacity:0;animation:fadeUp .7s .4s forwards;
-  }
+  .hero-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--accent2);letter-spacing:.2em;text-transform:uppercase;padding:.3rem .8rem;border:1px solid var(--accent2);margin-bottom:2rem;opacity:0;animation:fadeUp .6s .2s forwards;}
+  h1{font-size:clamp(3.5rem,8vw,7rem);font-weight:800;line-height:.95;opacity:0;animation:fadeUp .7s .4s forwards;}
   h1 .first{display:block;color:var(--text);}
-  h1 .last{
-    display:block;
-    -webkit-text-stroke:1px var(--accent);
-    color:transparent;
-    position:relative;
-  }
-  h1 .last::after{
-    content:attr(data-text);
-    position:absolute;left:0;
-    color:var(--accent);
-    clip-path:inset(0 100% 0 0);
-    animation:reveal 1.2s 1.2s forwards;
-  }
+  h1 .last{display:block;-webkit-text-stroke:1px var(--accent);color:transparent;position:relative;}
+  h1 .last::after{content:attr(data-text);position:absolute;left:0;color:var(--accent);clip-path:inset(0 100% 0 0);animation:reveal 1.2s 1.2s forwards;}
   @keyframes reveal{to{clip-path:inset(0 0% 0 0);}}
-  .hero-desc{
-    margin-top:1.5rem;max-width:480px;
-    color:var(--muted);font-size:1rem;line-height:1.7;
-    opacity:0;animation:fadeUp .7s .7s forwards;
-  }
-  .hero-cta{
-    margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;
-    opacity:0;animation:fadeUp .7s .9s forwards;
-  }
-  .btn{
-    padding:.75rem 1.8rem;font-family:'Space Mono',monospace;
-    font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
-    text-decoration:none;border:none;cursor:none;transition:all .3s;
-  }
-  .btn-primary{
-    background:var(--accent);color:#fff;
-    clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  }
+  .hero-desc{margin-top:1.5rem;max-width:480px;color:var(--muted);font-size:1rem;line-height:1.7;opacity:0;animation:fadeUp .7s .7s forwards;}
+  .hero-cta{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .9s forwards;}
+  .btn{padding:.75rem 1.8rem;font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:none;cursor:none;transition:all .3s;}
+  .btn-primary{background:var(--accent);color:#fff;clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));}
   .btn-primary:hover{background:#6d28d9;box-shadow:0 0 30px var(--glow);}
-  .btn-outline{
-    background:transparent;color:var(--text);
-    border:1px solid var(--border);
-    clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  }
+  .btn-outline{background:transparent;color:var(--text);border:1px solid var(--border);clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));}
   .btn-outline:hover{border-color:var(--accent2);color:var(--accent2);}
 
-  /* STATUS BADGE */
-  .status{
-    position:absolute;right:3rem;bottom:4rem;
-    display:flex;align-items:center;gap:.6rem;
-    font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);
-    opacity:0;animation:fadeUp .7s 1.1s forwards;
-  }
-  .dot{
-    width:8px;height:8px;border-radius:50%;background:#22c55e;
-    box-shadow:0 0 10px #22c55e;
-    animation:pulse 2s infinite;
-  }
+  .status{position:absolute;right:3rem;bottom:4rem;display:flex;align-items:center;gap:.6rem;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);opacity:0;animation:fadeUp .7s 1.1s forwards;}
+  .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e;animation:pulse 2s infinite;}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
-  /* SECTIONS */
   section{padding:6rem 3rem;position:relative;}
-  .section-label{
-    font-family:'Space Mono',monospace;font-size:.7rem;
-    color:var(--accent);letter-spacing:.25em;text-transform:uppercase;
-    margin-bottom:.8rem;
-    display:flex;align-items:center;gap:.8rem;
-  }
-  .section-label::after{
-    content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);
-  }
+  .section-label{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.25em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem;}
+  .section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
   h2{font-size:clamp(2rem,4vw,3.5rem);font-weight:800;margin-bottom:3rem;}
 
-  /* ABOUT */
   #about{background:var(--surface);}
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
   .about-text p{color:var(--muted);line-height:1.8;margin-bottom:1rem;}
   .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
-  .stat{
-    padding:1.5rem;border:1px solid var(--border);
-    background:var(--card);
-    clip-path:polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-    transition:border-color .3s;
-  }
+  .stat{padding:1.5rem;border:1px solid var(--border);background:var(--card);clip-path:polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));transition:border-color .3s;}
   .stat:hover{border-color:var(--accent);}
-  .stat-num{
-    font-size:2.5rem;font-weight:800;color:var(--accent);
-    font-family:'Space Mono',monospace;line-height:1;
-  }
+  .stat-num{font-size:2.5rem;font-weight:800;color:var(--accent);font-family:'Space Mono',monospace;line-height:1;}
   .stat-label{font-size:.8rem;color:var(--muted);margin-top:.3rem;letter-spacing:.05em;}
 
-  /* SKILLS */
   #skills{background:var(--bg);}
   .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
-  .skill-card{
-    padding:1.8rem;border:1px solid var(--border);
-    background:var(--card);transition:all .3s;
-    clip-path:polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
-    position:relative;overflow:hidden;
-  }
-  .skill-card::before{
-    content:'';position:absolute;top:0;left:0;right:0;height:1px;
-    background:linear-gradient(90deg,transparent,var(--accent),transparent);
-    transform:scaleX(0);transition:.3s;
-  }
+  .skill-card{padding:1.8rem;border:1px solid var(--border);background:var(--card);transition:all .3s;clip-path:polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);position:relative;overflow:hidden;}
+  .skill-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:scaleX(0);transition:.3s;}
   .skill-card:hover::before{transform:scaleX(1);}
   .skill-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.5);}
-  .skill-cat{
-    font-size:.65rem;font-family:'Space Mono',monospace;
-    color:var(--accent2);letter-spacing:.2em;text-transform:uppercase;
-    margin-bottom:1rem;
-  }
+  .skill-cat{font-size:.65rem;font-family:'Space Mono',monospace;color:var(--accent2);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem;}
   .skill-card h3{font-size:1rem;font-weight:700;margin-bottom:.8rem;}
   .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem;}
-  .tag{
-    padding:.25rem .6rem;font-size:.7rem;font-family:'Space Mono',monospace;
-    border:1px solid var(--border);color:var(--muted);
-    background:rgba(124,58,237,.05);transition:all .2s;
-  }
+  .tag{padding:.25rem .6rem;font-size:.7rem;font-family:'Space Mono',monospace;border:1px solid var(--border);color:var(--muted);background:rgba(124,58,237,.05);transition:all .2s;}
   .tag:hover{border-color:var(--accent);color:var(--accent);}
 
-  /* EXPERIENCE */
   #experience{background:var(--surface);}
   .exp-timeline{display:flex;flex-direction:column;gap:0;}
-  .exp-item{
-    display:grid;grid-template-columns:160px 1px 1fr;
-    gap:0 2rem;position:relative;
-  }
-  .exp-date{
-    font-family:'Space Mono',monospace;font-size:.75rem;
-    color:var(--accent);text-align:right;padding-top:1.5rem;
-    letter-spacing:.05em;
-  }
-  .exp-line{
-    display:flex;flex-direction:column;align-items:center;
-    position:relative;
-  }
-  .exp-dot{
-    width:14px;height:14px;border-radius:50%;
-    border:2px solid var(--accent);background:var(--bg);
-    margin-top:1.7rem;flex-shrink:0;position:relative;z-index:1;
-    box-shadow:0 0 15px var(--glow);
-  }
+  .exp-item{display:grid;grid-template-columns:160px 1px 1fr;gap:0 2rem;position:relative;}
+  .exp-date{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--accent);text-align:right;padding-top:1.5rem;letter-spacing:.05em;}
+  .exp-line{display:flex;flex-direction:column;align-items:center;position:relative;}
+  .exp-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);margin-top:1.7rem;flex-shrink:0;position:relative;z-index:1;box-shadow:0 0 15px var(--glow);}
   .exp-connector{flex:1;width:1px;background:linear-gradient(var(--border),transparent);min-height:40px;}
-  .exp-content{
-    padding:1.5rem 0 3rem;
-  }
-  .exp-company{
-    font-size:.7rem;font-family:'Space Mono',monospace;
-    color:var(--accent2);letter-spacing:.15em;text-transform:uppercase;
-    margin-bottom:.3rem;
-  }
+  .exp-content{padding:1.5rem 0 3rem;}
+  .exp-company{font-size:.7rem;font-family:'Space Mono',monospace;color:var(--accent2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.3rem;}
   .exp-title{font-size:1.2rem;font-weight:700;margin-bottom:.8rem;}
   .exp-desc{color:var(--muted);font-size:.9rem;line-height:1.7;}
   .exp-tools{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem;}
-  .tool-tag{
-    padding:.2rem .5rem;font-size:.65rem;font-family:'Space Mono',monospace;
-    background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);
-    color:var(--accent);
-  }
+  .tool-tag{padding:.2rem .5rem;font-size:.65rem;font-family:'Space Mono',monospace;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);color:var(--accent);}
 
-  /* FORMATION */
   #formation{background:var(--bg);}
   .edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
-  .edu-card{
-    padding:2rem;border:1px solid var(--border);background:var(--card);
-    position:relative;overflow:hidden;transition:all .3s;
-  }
-  .edu-card::after{
-    content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
-    background:linear-gradient(90deg,var(--accent),var(--accent2));
-    transform:scaleX(0);transform-origin:left;transition:.4s;
-  }
+  .edu-card{padding:2rem;border:1px solid var(--border);background:var(--card);position:relative;overflow:hidden;transition:all .3s;}
+  .edu-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transform-origin:left;transition:.4s;}
   .edu-card:hover::after{transform:scaleX(1);}
   .edu-card:hover{border-color:var(--border);box-shadow:0 20px 50px rgba(0,0,0,.6);}
-  .edu-year{
-    font-family:'Space Mono',monospace;font-size:.7rem;
-    color:var(--accent3);margin-bottom:.8rem;letter-spacing:.1em;
-  }
+  .edu-year{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--accent3);margin-bottom:.8rem;letter-spacing:.1em;}
   .edu-card h3{font-size:1rem;font-weight:700;margin-bottom:.4rem;}
   .edu-school{font-size:.85rem;color:var(--muted);}
-  .edu-badge{
-    position:absolute;top:1.5rem;right:1.5rem;
-    width:32px;height:32px;border-radius:50%;
-    border:1px solid var(--border);
-    display:flex;align-items:center;justify-content:center;
-    font-size:.8rem;
-  }
+  .edu-badge{position:absolute;top:1.5rem;right:1.5rem;width:32px;height:32px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.8rem;}
 
-  /* CONTACT */
-  #contact{
-    background:var(--surface);
-    text-align:center;
-  }
+  #contact{background:var(--surface);text-align:center;}
   .contact-inner{max-width:600px;margin:0 auto;}
   .contact-inner p{color:var(--muted);margin-bottom:2.5rem;line-height:1.7;}
   .contact-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2rem;}
-  .contact-link{
-    display:flex;align-items:center;gap:.6rem;
-    padding:.8rem 1.5rem;border:1px solid var(--border);
-    color:var(--text);text-decoration:none;font-family:'Space Mono',monospace;
-    font-size:.75rem;transition:all .3s;
-  }
+  .contact-link{display:flex;align-items:center;gap:.6rem;padding:.8rem 1.5rem;border:1px solid var(--border);color:var(--text);text-decoration:none;font-family:'Space Mono',monospace;font-size:.75rem;transition:all .3s;}
   .contact-link:hover{border-color:var(--accent2);color:var(--accent2);}
-  .contact-big{
-    display:block;font-size:clamp(1.5rem,4vw,3rem);
-    font-weight:800;color:var(--accent);
-    text-decoration:none;
-    letter-spacing:-.02em;
-    margin-bottom:.5rem;
-    transition:color .3s;
-  }
+  .contact-big{display:block;font-size:clamp(1.5rem,4vw,3rem);font-weight:800;color:var(--accent);text-decoration:none;letter-spacing:-.02em;margin-bottom:.5rem;transition:color .3s;}
   .contact-big:hover{color:var(--accent2);}
 
-  /* FOOTER */
-  footer{
-    padding:2rem 3rem;border-top:1px solid var(--border);
-    display:flex;justify-content:space-between;align-items:center;
-    font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);
-  }
+  footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);}
 
-  /* INTERESTS */
   .interests{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;}
-  .interest{
-    padding:.6rem 1.2rem;border:1px solid var(--border);
-    font-size:.8rem;color:var(--muted);
-    display:flex;align-items:center;gap:.5rem;
-    transition:all .3s;
-  }
+  .interest{padding:.6rem 1.2rem;border:1px solid var(--border);font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:.5rem;transition:all .3s;}
   .interest:hover{border-color:var(--accent3);color:var(--accent3);}
 
-  /* SCROLL INDICATOR */
-  .scroll-hint{
-    position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
-    font-family:'Space Mono',monospace;font-size:.65rem;
-    color:var(--muted);letter-spacing:.2em;text-transform:uppercase;
-    display:flex;flex-direction:column;align-items:center;gap:.5rem;
-    opacity:0;animation:fadeUp .7s 1.5s forwards;
-  }
-  .scroll-line{
-    width:1px;height:40px;
-    background:linear-gradient(var(--accent),transparent);
-    animation:scrollLine 1.5s infinite;
-  }
-  @keyframes scrollLine{
-    0%{transform:scaleY(0);transform-origin:top;}
-    50%{transform:scaleY(1);transform-origin:top;}
-    51%{transform:scaleY(1);transform-origin:bottom;}
-    100%{transform:scaleY(0);transform-origin:bottom;}
-  }
+  .scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fadeUp .7s 1.5s forwards;}
+  .scroll-line{width:1px;height:40px;background:linear-gradient(var(--accent),transparent);animation:scrollLine 1.5s infinite;}
+  @keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform:scaleY(1);transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
-  @keyframes fadeUp{
-    from{opacity:0;transform:translateY(20px);}
-    to{opacity:1;transform:translateY(0);}
-  }
-
-  /* LANG */
   .lang-bar{display:flex;flex-direction:column;gap:.8rem;margin-top:1rem;}
   .lang-row{display:flex;align-items:center;gap:1rem;}
   .lang-name{width:80px;font-size:.8rem;font-family:'Space Mono',monospace;color:var(--muted);}
@@ -358,17 +140,87 @@
   .lang-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
   .lang-level{font-size:.7rem;color:var(--muted);font-family:'Space Mono',monospace;}
 
-  /* RESPONSIVE */
-  @media(max-width:768px){
-    nav{padding:1rem 1.5rem;}
-    .nav-links{gap:1rem;}
-    section{padding:4rem 1.5rem;}
-    #hero{padding:6rem 1.5rem 4rem;}
-    .about-grid{grid-template-columns:1fr;}
-    .exp-item{grid-template-columns:90px 1px 1fr;}
-    footer{flex-direction:column;gap:.5rem;text-align:center;}
-    .status{right:1.5rem;}
-  }
+  /* ===== VEILLE SECTION ===== */
+  #veille{background:var(--bg);}
+  .veille-layout{display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:start;}
+  .veille-note{display:flex;flex-direction:column;gap:1.5rem;}
+  .veille-block{border:1px solid var(--border);background:var(--card);padding:1.5rem;}
+  .veille-block-label{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--accent);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem;}
+  .veille-block-label::before{content:'▸';color:var(--accent2);}
+  .veille-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:0;}
+  .v-stat{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);padding:.8rem;text-align:center;}
+  .v-stat-val{font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--accent);}
+  .v-stat-lbl{font-size:.62rem;color:var(--muted);margin-top:.25rem;line-height:1.4;}
+  .veille-player-list{display:flex;flex-direction:column;gap:0;}
+  .vp-row{display:flex;align-items:flex-start;gap:.8rem;padding:.7rem 0;border-bottom:1px solid var(--border);}
+  .vp-row:last-child{border-bottom:none;}
+  .vp-badge{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;padding:.15rem .5rem;border:1px solid;white-space:nowrap;flex-shrink:0;margin-top:3px;}
+  .vp-meta{background:rgba(6,182,212,.1);color:#22d3ee;border-color:rgba(6,182,212,.3);}
+  .vp-apple{background:rgba(100,116,139,.1);color:#94a3b8;border-color:rgba(100,116,139,.3);}
+  .vp-sony{background:rgba(245,158,11,.1);color:#fbbf24;border-color:rgba(245,158,11,.3);}
+  .vp-samsung{background:rgba(34,197,94,.1);color:#4ade80;border-color:rgba(34,197,94,.3);}
+  .vp-valve{background:rgba(239,68,68,.1);color:#f87171;border-color:rgba(239,68,68,.3);}
+  .vp-text{font-size:.78rem;color:var(--muted);line-height:1.5;}
+  .vp-text strong{color:var(--text);font-weight:600;}
+  .veille-usages{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;}
+  .vu-card{border:1px solid var(--border);background:rgba(124,58,237,.04);padding:.8rem 1rem;}
+  .vu-title{font-size:.75rem;font-weight:700;color:var(--text);margin-bottom:.3rem;}
+  .vu-text{font-size:.72rem;color:var(--muted);line-height:1.5;}
+  .veille-freins-list{list-style:none;display:flex;flex-direction:column;gap:0;}
+  .veille-freins-list li{font-size:.78rem;color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--border);display:flex;gap:.6rem;line-height:1.5;}
+  .veille-freins-list li:last-child{border-bottom:none;}
+  .veille-freins-list li::before{content:'—';color:#64748b;flex-shrink:0;}
+  .veille-outlook{list-style:none;display:flex;flex-direction:column;gap:0;}
+  .veille-outlook li{font-size:.78rem;color:var(--muted);padding:.5rem 0 .5rem 1rem;border-bottom:1px solid var(--border);position:relative;line-height:1.5;}
+  .veille-outlook li:last-child{border-bottom:none;}
+  .veille-outlook li::before{content:'→';position:absolute;left:0;color:var(--accent2);font-size:.7rem;top:.6rem;}
+
+  /* LIVE FEED */
+  .veille-live{position:sticky;top:100px;}
+  .live-box{border:1px solid rgba(6,182,212,.3);background:var(--card);padding:1.5rem;}
+  .live-header{display:flex;align-items:center;gap:.6rem;margin-bottom:1.2rem;padding-bottom:.8rem;border-bottom:1px solid var(--border);}
+  .live-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e;animation:pulse 2s infinite;flex-shrink:0;}
+  .live-title{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--accent2);letter-spacing:.15em;text-transform:uppercase;}
+  .live-updated{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);margin-left:auto;}
+  .live-feed{display:flex;flex-direction:column;gap:.6rem;max-height:520px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+  .live-item{padding:.7rem;border:1px solid var(--border);background:rgba(5,5,8,.6);animation:slideIn .4s ease;}
+  @keyframes slideIn{from{opacity:0;transform:translateX(10px);}to{opacity:1;transform:translateX(0);}}
+  .live-item-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem;}
+  .live-tag{font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.1em;padding:.1rem .4rem;border:1px solid;text-transform:uppercase;}
+  .live-tag-marche{color:#a78bfa;border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.08);}
+  .live-tag-tech{color:#22d3ee;border-color:rgba(34,211,238,.3);background:rgba(34,211,238,.08);}
+  .live-tag-usage{color:#4ade80;border-color:rgba(74,222,128,.3);background:rgba(74,222,128,.08);}
+  .live-tag-alerte{color:#f87171;border-color:rgba(248,113,113,.3);background:rgba(248,113,113,.08);}
+  .live-time{font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted);}
+  .live-text{font-size:.75rem;color:var(--muted);line-height:1.5;}
+  .live-text strong{color:var(--text);}
+  .live-search{width:100%;background:transparent;border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:.7rem;padding:.5rem .7rem;margin-bottom:.8rem;outline:none;transition:border-color .2s;}
+  .live-search:focus{border-color:var(--accent2);}
+  .live-search::placeholder{color:var(--muted);}
+  .live-filters{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem;}
+  .live-filter{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid var(--border);color:var(--muted);background:transparent;cursor:none;transition:all .2s;}
+  .live-filter:hover,.live-filter.active{border-color:var(--accent);color:var(--accent);background:rgba(124,58,237,.1);}
+  .live-footer{margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-align:center;}
+
+  /* ===== PROJECTS ===== */
+  .filter-btn{padding:.4rem 1rem;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:1px solid var(--border);color:var(--muted);cursor:none;transition:all .25s;}
+  .filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(124,58,237,.1);}
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+  .proj-card{display:flex;flex-direction:column;padding:1.5rem;border:1px solid var(--border);background:var(--card);text-decoration:none;color:var(--text);transition:all .3s;position:relative;overflow:hidden;}
+  .proj-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,58,237,.05),transparent);opacity:0;transition:.3s;}
+  .proj-card:hover::before{opacity:1;}
+  .proj-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 15px 40px rgba(0,0,0,.5);}
+  .proj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;}
+  .proj-lang{font-size:.6rem;font-family:'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid;}
+  .proj-date{font-size:.65rem;color:var(--muted);font-family:'Space Mono',monospace;}
+  .proj-title{font-size:.95rem;font-weight:700;margin-bottom:.5rem;font-family:'Space Mono',monospace;}
+  .proj-desc{font-size:.82rem;color:var(--muted);line-height:1.6;flex:1;}
+  .proj-footer{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:1rem;}
+  .proj-tag{font-size:.6rem;font-family:'Space Mono',monospace;padding:.15rem .45rem;border:1px solid var(--border);color:var(--muted);}
+  .proj-card.hidden{display:none;}
+
+  @media(max-width:900px){.veille-layout{grid-template-columns:1fr;}.veille-live{position:static;}}
+  @media(max-width:768px){nav{padding:1rem 1.5rem;}.nav-links{gap:1rem;}section{padding:4rem 1.5rem;}#hero{padding:6rem 1.5rem 4rem;}.about-grid{grid-template-columns:1fr;}.exp-item{grid-template-columns:90px 1px 1fr;}footer{flex-direction:column;gap:.5rem;text-align:center;}.status{right:1.5rem;}.veille-stat-row{grid-template-columns:1fr 1fr;}.veille-usages{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -382,6 +234,7 @@
     <a href="#about">Profil</a>
     <a href="#skills">Skills</a>
     <a href="#experience">XP</a>
+    <a href="#veille">Veille</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -396,22 +249,14 @@
       <span class="first">Samuel</span>
       <span class="last" data-text="Coquitte">Coquitte</span>
     </h1>
-    <p class="hero-desc">
-      Développeur full-stack en formation, passionné par la création d'applications mobiles et web. Autonome, déterminé, team-player.
-    </p>
+    <p class="hero-desc">Développeur full-stack en formation, passionné par la création d'applications mobiles et web. Autonome, déterminé, team-player.</p>
     <div class="hero-cta">
       <a href="#experience" class="btn btn-primary">Voir mes expériences</a>
       <a href="#contact" class="btn btn-outline">Me contacter</a>
     </div>
   </div>
-  <div class="status">
-    <div class="dot"></div>
-    Disponible pour opportunités
-  </div>
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
+  <div class="status"><div class="dot"></div>Disponible pour opportunités</div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
 
 <!-- ABOUT -->
@@ -423,16 +268,8 @@
       <p>Étudiant en 2ème année de BTS SIO option SLAM au Lycée Monnet-Mermoz d'Aurillac, je développe des compétences solides en développement d'applications mobiles et web.</p>
       <p>J'ai eu l'opportunité de travailler sur des projets concrets en stage — de la création d'une application mobile avec chatbot à des solutions Power Apps pour la SNCF. J'aime transformer des problèmes réels en solutions digitales propres et efficaces.</p>
       <div class="lang-bar">
-        <div class="lang-row">
-          <span class="lang-name">Français</span>
-          <div class="lang-track"><div class="lang-fill" style="width:100%"></div></div>
-          <span class="lang-level">Natif</span>
-        </div>
-        <div class="lang-row">
-          <span class="lang-name">Anglais</span>
-          <div class="lang-track"><div class="lang-fill" style="width:55%"></div></div>
-          <span class="lang-level">B1</span>
-        </div>
+        <div class="lang-row"><span class="lang-name">Français</span><div class="lang-track"><div class="lang-fill" style="width:100%"></div></div><span class="lang-level">Natif</span></div>
+        <div class="lang-row"><span class="lang-name">Anglais</span><div class="lang-track"><div class="lang-fill" style="width:55%"></div></div><span class="lang-level">B1</span></div>
       </div>
       <div class="interests">
         <div class="interest">🥊 Boxe en club</div>
@@ -440,22 +277,10 @@
       </div>
     </div>
     <div class="about-stats">
-      <div class="stat">
-        <div class="stat-num">2</div>
-        <div class="stat-label">Stages réalisés</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">10+</div>
-        <div class="stat-label">Langages maîtrisés</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">BTS</div>
-        <div class="stat-label">SIO SLAM · 2026</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">2+</div>
-        <div class="stat-label">Ans de formation</div>
-      </div>
+      <div class="stat"><div class="stat-num">2</div><div class="stat-label">Stages réalisés</div></div>
+      <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Langages maîtrisés</div></div>
+      <div class="stat"><div class="stat-num">BTS</div><div class="stat-label">SIO SLAM · 2026</div></div>
+      <div class="stat"><div class="stat-num">2+</div><div class="stat-label">Ans de formation</div></div>
     </div>
   </div>
 </section>
@@ -469,56 +294,35 @@
       <div class="skill-cat">Langages</div>
       <h3>Core Languages</h3>
       <div class="tags">
-        <span class="tag">JavaScript</span><span class="tag">TypeScript</span>
-        <span class="tag">Python</span><span class="tag">C#</span>
-        <span class="tag">Java</span><span class="tag">PHP</span>
-        <span class="tag">SQL</span><span class="tag">C</span>
-        <span class="tag">Arduino</span>
+        <span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">Python</span><span class="tag">C#</span><span class="tag">Java</span><span class="tag">PHP</span><span class="tag">SQL</span><span class="tag">C</span><span class="tag">Arduino</span>
       </div>
     </div>
     <div class="skill-card">
       <div class="skill-cat">Frontend</div>
       <h3>Interfaces & UI</h3>
       <div class="tags">
-        <span class="tag">Angular</span><span class="tag">HTML5</span>
-        <span class="tag">CSS3</span><span class="tag">React Native</span>
+        <span class="tag">Angular</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">React Native</span>
       </div>
     </div>
     <div class="skill-card">
       <div class="skill-cat">Backend & Base de données</div>
       <h3>Serveur & Data</h3>
       <div class="tags">
-        <span class="tag">Node.js</span><span class="tag">Symfony</span>
-        <span class="tag">PostgreSQL</span><span class="tag">RESTful API</span>
+        <span class="tag">Node.js</span><span class="tag">Symfony</span><span class="tag">PostgreSQL</span><span class="tag">RESTful API</span>
       </div>
     </div>
     <div class="skill-card">
       <div class="skill-cat">Outils & DevOps</div>
       <h3>Environnement</h3>
       <div class="tags">
-        <span class="tag">Git</span><span class="tag">GitLab</span>
-        <span class="tag">Linux</span><span class="tag">Bash</span>
-        <span class="tag">PowerShell</span><span class="tag">Terminal</span>
-        <span class="tag">Scrum</span><span class="tag">Regex</span>
-        <span class="tag">ELK</span><span class="tag">JUnit</span>
+        <span class="tag">Git</span><span class="tag">GitLab</span><span class="tag">Linux</span><span class="tag">Bash</span><span class="tag">PowerShell</span><span class="tag">Terminal</span><span class="tag">Scrum</span><span class="tag">Regex</span><span class="tag">ELK</span><span class="tag">JUnit</span>
       </div>
     </div>
     <div class="skill-card">
       <div class="skill-cat">Microsoft</div>
       <h3>Power Platform</h3>
       <div class="tags">
-        <span class="tag">Power Apps</span><span class="tag">SharePoint</span>
-        <span class="tag">Power Automate</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-cat">Créatif</div>
-      <h3>Adobe & 3D</h3>
-      <div class="tags">
-        <span class="tag">Photoshop</span><span class="tag">Premiere Pro</span>
-        <span class="tag">After Effects</span><span class="tag">Illustrator</span>
-        <span class="tag">InDesign</span><span class="tag">XD</span>
-        <span class="tag">Blender</span>
+        <span class="tag">Power Apps</span><span class="tag">SharePoint</span><span class="tag">Power Automate</span>
       </div>
     </div>
   </div>
@@ -531,41 +335,22 @@
   <div class="exp-timeline">
     <div class="exp-item">
       <div class="exp-date">2026</div>
-      <div class="exp-line">
-        <div class="exp-dot"></div>
-        <div class="exp-connector"></div>
-      </div>
+      <div class="exp-line"><div class="exp-dot"></div><div class="exp-connector"></div></div>
       <div class="exp-content">
         <div class="exp-company">SNCF</div>
         <div class="exp-title">Stage — Développeur Power Apps</div>
-        <p class="exp-desc">
-          Développement de plusieurs applications internes dont une solution complète de gestion de stock pour un mini-magasin. Conception de l'interface, structuration des données et automatisation des processus métier.
-        </p>
-        <div class="exp-tools">
-          <span class="tool-tag">Power Apps</span>
-          <span class="tool-tag">SharePoint</span>
-          <span class="tool-tag">Power Automate</span>
-        </div>
+        <p class="exp-desc">Développement de plusieurs applications internes dont une solution complète de gestion de stock pour un mini-magasin. Conception de l'interface, structuration des données et automatisation des processus métier.</p>
+        <div class="exp-tools"><span class="tool-tag">Power Apps</span><span class="tool-tag">SharePoint</span><span class="tool-tag">Power Automate</span></div>
       </div>
     </div>
     <div class="exp-item">
       <div class="exp-date">2025</div>
-      <div class="exp-line">
-        <div class="exp-dot"></div>
-        <div class="exp-connector"></div>
-      </div>
+      <div class="exp-line"><div class="exp-dot"></div><div class="exp-connector"></div></div>
       <div class="exp-content">
         <div class="exp-company">École de la 2ème Chance</div>
         <div class="exp-title">Stage — Développeur Application Mobile</div>
-        <p class="exp-desc">
-          Création d'une application APK de lexique complète avec narrateurs intégrés et chatbot conversationnel. Conception de l'expérience utilisateur et intégration de technologies Text-to-Speech.
-        </p>
-        <div class="exp-tools">
-          <span class="tool-tag">TypeScript</span>
-          <span class="tool-tag">JSON</span>
-          <span class="tool-tag">TTS</span>
-          <span class="tool-tag">No-code</span>
-        </div>
+        <p class="exp-desc">Création d'une application APK de lexique complète avec narrateurs intégrés et chatbot conversationnel. Conception de l'expérience utilisateur et intégration de technologies Text-to-Speech.</p>
+        <div class="exp-tools"><span class="tool-tag">TypeScript</span><span class="tool-tag">JSON</span><span class="tool-tag">TTS</span><span class="tool-tag">No-code</span></div>
       </div>
     </div>
   </div>
@@ -576,24 +361,9 @@
   <div class="section-label">04 — Formation</div>
   <h2>Parcours</h2>
   <div class="edu-grid">
-    <div class="edu-card">
-      <div class="edu-badge">🎓</div>
-      <div class="edu-year">2025 – 2026 · En cours</div>
-      <h3>BTS SIO — Option SLAM</h3>
-      <div class="edu-school">Lycée Monnet-Mermoz · Aurillac (15)</div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-badge">📘</div>
-      <div class="edu-year">2024</div>
-      <h3>Baccalauréat STI2D</h3>
-      <div class="edu-school">Option SIN · Lycée Monnet-Mermoz (15)</div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-badge">📗</div>
-      <div class="edu-year">2020</div>
-      <h3>Brevet des Collèges</h3>
-      <div class="edu-school">Collège Val de Senouire (43)</div>
-    </div>
+    <div class="edu-card"><div class="edu-badge">🎓</div><div class="edu-year">2025 – 2026 · En cours</div><h3>BTS SIO — Option SLAM</h3><div class="edu-school">Lycée Monnet-Mermoz · Aurillac (15)</div></div>
+    <div class="edu-card"><div class="edu-badge">📘</div><div class="edu-year">2024</div><h3>Baccalauréat STI2D</h3><div class="edu-school">Option SIN · Lycée Monnet-Mermoz (15)</div></div>
+    <div class="edu-card"><div class="edu-badge">📗</div><div class="edu-year">2020</div><h3>Brevet des Collèges</h3><div class="edu-school">Collège Val de Senouire (43)</div></div>
   </div>
 </section>
 
@@ -601,7 +371,6 @@
 <section id="projets" style="background:var(--bg);">
   <div class="section-label">05 — Projets GitLab</div>
   <h2>Activités de cours</h2>
-
   <div style="display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.5rem;">
     <button class="filter-btn active" data-cat="all">Tous</button>
     <button class="filter-btn" data-cat="securite">Sécurité</button>
@@ -611,379 +380,140 @@
     <button class="filter-btn" data-cat="bdd">BDD & API</button>
     <button class="filter-btn" data-cat="divers">Divers</button>
   </div>
-
   <div class="projects-grid" id="projectsGrid">
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/mysql-bruteforce" target="_blank" class="proj-card" data-cat="securite"><div class="proj-top"><span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span><span class="proj-date">Sep 2024</span></div><h3 class="proj-title">mysql-bruteforce</h3><p class="proj-desc">Test de robustesse par bruteforce sur une base MySQL — notions d'attaque par dictionnaire.</p><div class="proj-footer"><span class="proj-tag">MySQL</span><span class="proj-tag">Sécurité</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b3m3-token" target="_blank" class="proj-card" data-cat="securite"><div class="proj-top"><span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span><span class="proj-date">Fév 2025</span></div><h3 class="proj-title">b3m3-token</h3><p class="proj-desc">Gestion de tokens d'authentification — sécurisation des accès et sessions.</p><div class="proj-footer"><span class="proj-tag">Auth</span><span class="proj-tag">Token</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b3m4-volauth" target="_blank" class="proj-card" data-cat="securite"><div class="proj-top"><span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span><span class="proj-date">Mar 2025</span></div><h3 class="proj-title">b3m4-volauth</h3><p class="proj-desc">Étude et simulation de vol de session / authentification — failles et contre-mesures.</p><div class="proj-footer"><span class="proj-tag">Session</span><span class="proj-tag">Sécurité</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m13-juice-shop-groupe1" target="_blank" class="proj-card" data-cat="securite"><div class="proj-top"><span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span><span class="proj-date">Mar 2025</span></div><h3 class="proj-title">juice-shop — groupe 1</h3><p class="proj-desc">OWASP Juice Shop — exploitation de vulnérabilités web classiques (XSS, SQLi, IDOR…).</p><div class="proj-footer"><span class="proj-tag">OWASP</span><span class="proj-tag">Pentest</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m12-scrapingosint" target="_blank" class="proj-card" data-cat="securite"><div class="proj-top"><span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span><span class="proj-date">Mar 2025</span></div><h3 class="proj-title">b2m12-ScrapingOSINT</h3><p class="proj-desc">Scraping et renseignement en sources ouvertes (OSINT) — collecte et analyse de données publiques.</p><div class="proj-footer"><span class="proj-tag">Python</span><span class="proj-tag">OSINT</span><span class="proj-tag">Scraping</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m3-bash" target="_blank" class="proj-card" data-cat="systeme"><div class="proj-top"><span class="proj-lang" style="background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.3);">Système</span><span class="proj-date">Sep 2024</span></div><h3 class="proj-title">b1m3-bash</h3><p class="proj-desc">Scripting Bash — automatisation de tâches système, manipulation de fichiers et processus.</p><div class="proj-footer"><span class="proj-tag">Bash</span><span class="proj-tag">Linux</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b3m1-langage-c" target="_blank" class="proj-card" data-cat="systeme"><div class="proj-top"><span class="proj-lang" style="background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.3);">Système</span><span class="proj-date">Oct 2024</span></div><h3 class="proj-title">b3m1-langage-c</h3><p class="proj-desc">Programmation en C — gestion de la mémoire, pointeurs, structures de données bas niveau.</p><div class="proj-footer"><span class="proj-tag">C</span><span class="proj-tag">Système</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m9-scriptinglogs" target="_blank" class="proj-card" data-cat="systeme"><div class="proj-top"><span class="proj-lang" style="background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.3);">Système</span><span class="proj-date">Mar 2025</span></div><h3 class="proj-title">b1m9-scriptinglogs</h3><p class="proj-desc">Scripting pour l'analyse et la supervision de logs système — parsing et alertes automatiques.</p><div class="proj-footer"><span class="proj-tag">Bash</span><span class="proj-tag">ELK</span><span class="proj-tag">Logs</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m10-powershell" target="_blank" class="proj-card" data-cat="systeme"><div class="proj-top"><span class="proj-lang" style="background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.3);">Système</span><span class="proj-date">Avr 2025</span></div><h3 class="proj-title">b1m10-powershell</h3><p class="proj-desc">Scripting PowerShell — administration Windows, automatisation et gestion des services.</p><div class="proj-footer"><span class="proj-tag">PowerShell</span><span class="proj-tag">Windows</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m4-html-css" target="_blank" class="proj-card" data-cat="web"><div class="proj-top"><span class="proj-lang" style="background:rgba(6,182,212,.15);color:#22d3ee;border-color:rgba(6,182,212,.3);">Web</span><span class="proj-date">Sep 2024</span></div><h3 class="proj-title">b1m4-html-css</h3><p class="proj-desc">Fondamentaux HTML5 & CSS3 — mise en page, responsive design et animations CSS.</p><div class="proj-footer"><span class="proj-tag">HTML5</span><span class="proj-tag">CSS3</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/ap-wordpress" target="_blank" class="proj-card" data-cat="web"><div class="proj-top"><span class="proj-lang" style="background:rgba(6,182,212,.15);color:#22d3ee;border-color:rgba(6,182,212,.3);">Web</span><span class="proj-date">Sep 2024</span></div><h3 class="proj-title">ap-wordpress</h3><p class="proj-desc">Création et personnalisation d'un site WordPress — thèmes, plugins et gestion de contenu.</p><div class="proj-footer"><span class="proj-tag">WordPress</span><span class="proj-tag">PHP</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m5-javascript" target="_blank" class="proj-card" data-cat="web"><div class="proj-top"><span class="proj-lang" style="background:rgba(6,182,212,.15);color:#22d3ee;border-color:rgba(6,182,212,.3);">Web</span><span class="proj-date">Nov 2024</span></div><h3 class="proj-title">b1m5-Javascript</h3><p class="proj-desc">JavaScript ES6+ — manipulation du DOM, événements, fetch API et programmation asynchrone.</p><div class="proj-footer"><span class="proj-tag">JavaScript</span><span class="proj-tag">DOM</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b3m2-http" target="_blank" class="proj-card" data-cat="web"><div class="proj-top"><span class="proj-lang" style="background:rgba(6,182,212,.15);color:#22d3ee;border-color:rgba(6,182,212,.3);">Web</span><span class="proj-date">Jan 2025</span></div><h3 class="proj-title">b3m2-http</h3><p class="proj-desc">Protocole HTTP — requêtes, réponses, headers, méthodes REST et communication client-serveur.</p><div class="proj-footer"><span class="proj-tag">HTTP</span><span class="proj-tag">REST</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b1m1-java-tu" target="_blank" class="proj-card" data-cat="java"><div class="proj-top"><span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">Java</span><span class="proj-date">Jan 2025</span></div><h3 class="proj-title">b2m1-java-tu</h3><p class="proj-desc">Tests unitaires Java avec JUnit — TDD, assertions, couverture de code et qualité logicielle.</p><div class="proj-footer"><span class="proj-tag">Java</span><span class="proj-tag">JUnit</span><span class="proj-tag">TDD</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m3-poo" target="_blank" class="proj-card" data-cat="java"><div class="proj-top"><span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">Java</span><span class="proj-date">Fév 2025</span></div><h3 class="proj-title">b2m3-poo</h3><p class="proj-desc">Programmation Orientée Objet en Java — héritage, polymorphisme, interfaces et design patterns.</p><div class="proj-footer"><span class="proj-tag">Java</span><span class="proj-tag">POO</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m4-arraylist" target="_blank" class="proj-card" data-cat="java"><div class="proj-top"><span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">Java</span><span class="proj-date">Fév 2025</span></div><h3 class="proj-title">b2m4-ArrayList</h3><p class="proj-desc">Collections Java — ArrayList, manipulation de listes dynamiques et algorithmes de tri.</p><div class="proj-footer"><span class="proj-tag">Java</span><span class="proj-tag">Collections</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m4-dictionnaire" target="_blank" class="proj-card" data-cat="java"><div class="proj-top"><span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">Java</span><span class="proj-date">Mar 2025</span></div><h3 class="proj-title">b2m4-dictionnaire</h3><p class="proj-desc">Structure de données dictionnaire en Java — HashMap, recherche et gestion de paires clé-valeur.</p><div class="proj-footer"><span class="proj-tag">Java</span><span class="proj-tag">HashMap</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/apm7-csharp" target="_blank" class="proj-card" data-cat="java"><div class="proj-top"><span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">C#</span><span class="proj-date">Fév 2025</span></div><h3 class="proj-title">apm7-csharp</h3><p class="proj-desc">Introduction au C# — syntaxe, POO .NET, et développement d'applications console.</p><div class="proj-footer"><span class="proj-tag">C#</span><span class="proj-tag">.NET</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m6-sql" target="_blank" class="proj-card" data-cat="bdd"><div class="proj-top"><span class="proj-lang" style="background:rgba(124,58,237,.15);color:#a78bfa;border-color:rgba(124,58,237,.3);">BDD</span><span class="proj-date">Déc 2024</span></div><h3 class="proj-title">b1m6-SQL</h3><p class="proj-desc">Langage SQL — requêtes SELECT, jointures, agrégats, sous-requêtes et optimisation.</p><div class="proj-footer"><span class="proj-tag">SQL</span><span class="proj-tag">PostgreSQL</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m5-nasa" target="_blank" class="proj-card" data-cat="bdd"><div class="proj-top"><span class="proj-lang" style="background:rgba(124,58,237,.15);color:#a78bfa;border-color:rgba(124,58,237,.3);">API</span><span class="proj-date">Mar 2025</span></div><h3 class="proj-title">b2m5-nasa</h3><p class="proj-desc">Consommation de l'API NASA — récupération d'images astronomiques et données spatiales en temps réel.</p><div class="proj-footer"><span class="proj-tag">API REST</span><span class="proj-tag">NASA</span><span class="proj-tag">JS</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m6-transacs" target="_blank" class="proj-card" data-cat="bdd"><div class="proj-top"><span class="proj-lang" style="background:rgba(124,58,237,.15);color:#a78bfa;border-color:rgba(124,58,237,.3);">BDD</span><span class="proj-date">Avr 2025</span></div><h3 class="proj-title">b2m6-transacs</h3><p class="proj-desc">Transactions SQL — ACID, gestion de la concurrence, rollback et intégrité des données.</p><div class="proj-footer"><span class="proj-tag">SQL</span><span class="proj-tag">Transactions</span><span class="proj-tag">ACID</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/scoquitte/ProjetTP" target="_blank" class="proj-card" data-cat="divers"><div class="proj-top"><span class="proj-lang" style="background:rgba(236,72,153,.15);color:#f472b6;border-color:rgba(236,72,153,.3);">Perso</span><span class="proj-date">Fév 2025</span></div><h3 class="proj-title">ProjetTP</h3><p class="proj-desc">Projet personnel créé via l'API GitLab avec Postman — tests d'intégration et automatisation CI.</p><div class="proj-footer"><span class="proj-tag">Postman</span><span class="proj-tag">API GitLab</span></div></a>
+    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b3m12-revisions" target="_blank" class="proj-card" data-cat="divers"><div class="proj-top"><span class="proj-lang" style="background:rgba(236,72,153,.15);color:#f472b6;border-color:rgba(236,72,153,.3);">Révisions</span><span class="proj-date">2025</span></div><h3 class="proj-title">b3m12-revisions</h3><p class="proj-desc">Module de révisions consolidant les acquis de 2 ans de formation BTS SIO SLAM.</p><div class="proj-footer"><span class="proj-tag">Full Stack</span><span class="proj-tag">BTS SIO</span></div></a>
+  </div>
+</section>
 
-    <!-- SECURITE -->
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/mysql-bruteforce" target="_blank" class="proj-card" data-cat="securite">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span>
-        <span class="proj-date">Sep 2024</span>
-      </div>
-      <h3 class="proj-title">mysql-bruteforce</h3>
-      <p class="proj-desc">Test de robustesse par bruteforce sur une base MySQL — notions d'attaque par dictionnaire.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">MySQL</span><span class="proj-tag">Sécurité</span>
-      </div>
-    </a>
 
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b3m3-token" target="_blank" class="proj-card" data-cat="securite">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span>
-        <span class="proj-date">Fév 2025</span>
-      </div>
-      <h3 class="proj-title">b3m3-token</h3>
-      <p class="proj-desc">Gestion de tokens d'authentification — sécurisation des accès et sessions.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">Auth</span><span class="proj-tag">Token</span>
-      </div>
-    </a>
+<!-- VEILLE TECHNOLOGIQUE -->
+<section id="veille" style="background:var(--surface);">
+  <div class="section-label">06 — Veille technologique</div>
+  <h2>Réalité Virtuelle · 2026</h2>
+  <div class="veille-layout">
 
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b3m4-volauth" target="_blank" class="proj-card" data-cat="securite">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span>
-        <span class="proj-date">Mar 2025</span>
-      </div>
-      <h3 class="proj-title">b3m4-volauth</h3>
-      <p class="proj-desc">Étude et simulation de vol de session / authentification — failles et contre-mesures.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">Session</span><span class="proj-tag">Sécurité</span>
-      </div>
-    </a>
+    <!-- NOTE DE VEILLE -->
+    <div class="veille-note">
 
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m13-juice-shop-groupe1" target="_blank" class="proj-card" data-cat="securite">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span>
-        <span class="proj-date">Mar 2025</span>
+      <!-- Marché -->
+      <div class="veille-block">
+        <div class="veille-block-label">Marché en chiffres</div>
+        <div class="veille-stat-row">
+          <div class="v-stat"><div class="v-stat-val">+200 Md$</div><div class="v-stat-lbl">marché AR/VR estimé d'ici 2030</div></div>
+          <div class="v-stat"><div class="v-stat-val">+22 %</div><div class="v-stat-lbl">croissance annuelle 2025–2030</div></div>
+          <div class="v-stat"><div class="v-stat-val">12 M</div><div class="v-stat-lbl">casques expédiés en 2024</div></div>
+        </div>
       </div>
-      <h3 class="proj-title">juice-shop — groupe 1</h3>
-      <p class="proj-desc">OWASP Juice Shop — exploitation de vulnérabilités web classiques (XSS, SQLi, IDOR…).</p>
-      <div class="proj-footer">
-        <span class="proj-tag">OWASP</span><span class="proj-tag">Pentest</span>
-      </div>
-    </a>
 
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m13-juice-shop-groupe2" target="_blank" class="proj-card" data-cat="securite">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span>
-        <span class="proj-date">Avr 2025</span>
+      <!-- Acteurs -->
+      <div class="veille-block">
+        <div class="veille-block-label">Acteurs & matériel clés</div>
+        <div class="veille-player-list">
+          <div class="vp-row"><span class="vp-badge vp-meta">Meta</span><p class="vp-text"><strong>Quest 4 repoussé à fin 2026.</strong> Projet "Puffin" : lunettes &lt;110 g, sans contrôleurs, contenu immersif avec Disney et A24.</p></div>
+          <div class="vp-row"><span class="vp-badge vp-apple">Apple</span><p class="vp-text"><strong>Apple Vision</strong> (1 500–2 000 €), orienté productivité. Remplace l'iPad Pro pour les pros. Puce M5, visionOS 26.</p></div>
+          <div class="vp-row"><span class="vp-badge vp-sony">Sony</span><p class="vp-text"><strong>PlayStation VR2 & VR3</strong> : retour haptique, suivi du regard, 120 Hz natif. Cible : gamers console.</p></div>
+          <div class="vp-row"><span class="vp-badge vp-samsung">Samsung</span><p class="vp-text"><strong>Galaxy XR</strong> lancé fin 2025, déploiement mondial 2026. Android XR + Gemini AI intégré.</p></div>
+          <div class="vp-row"><span class="vp-badge vp-valve">Valve</span><p class="vp-text"><strong>Steam Frame</strong>, successeur de l'Index, prévu début 2026. Puissant, flexible, compatible PCVR.</p></div>
+        </div>
       </div>
-      <h3 class="proj-title">juice-shop — groupe 2</h3>
-      <p class="proj-desc">Suite de l'exploitation Juice Shop avec un second groupe — scénarios d'attaque avancés.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">OWASP</span><span class="proj-tag">Pentest</span>
-      </div>
-    </a>
 
-    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m12-scrapingosint" target="_blank" class="proj-card" data-cat="securite">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3);">Sécurité</span>
-        <span class="proj-date">Mar 2025</span>
+      <!-- Usages sectoriels -->
+      <div class="veille-block">
+        <div class="veille-block-label">Usages sectoriels</div>
+        <div class="veille-usages">
+          <div class="vu-card"><div class="vu-title">🏥 Santé</div><div class="vu-text">Formation chirurgicale, simulation de soins, communication patient. Marché estimé à 40 Md$ en 2026. Déploiements en hôpitaux et universités.</div></div>
+          <div class="vu-card"><div class="vu-title">🎓 Éducation</div><div class="vu-text">Apprentissage immersif, répétition sans risque, mémorisation renforcée. Forte croissance dans la formation professionnelle.</div></div>
+          <div class="vu-card"><div class="vu-title">🏭 Industrie</div><div class="vu-text">Simulation de production, formation terrain, maintenance assistée. 8,3 M d'unités B2B prévues en 2026.</div></div>
+          <div class="vu-card"><div class="vu-title">🎮 Jeux & divertissement</div><div class="vu-text">Premier marché en volume. Contenu exclusif, nouvelles IPs immersives, expériences sociales en VR.</div></div>
+        </div>
       </div>
-      <h3 class="proj-title">b2m12-ScrapingOSINT</h3>
-      <p class="proj-desc">Scraping et renseignement en sources ouvertes (OSINT) — collecte et analyse de données publiques.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">Python</span><span class="proj-tag">OSINT</span><span class="proj-tag">Scraping</span>
-      </div>
-    </a>
 
-    <!-- SYSTEME & SCRIPTING -->
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m3-bash" target="_blank" class="proj-card" data-cat="systeme">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.3);">Système</span>
-        <span class="proj-date">Sep 2024</span>
+      <!-- IA + VR -->
+      <div class="veille-block">
+        <div class="veille-block-label">Tendance clé — IA + VR</div>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.6;">L'IA générative s'intègre au cœur des expériences : <strong style="color:var(--text);">Google Gemini</strong> analyse l'environnement en temps réel sous Android XR, génère du contenu 3D à la volée et permet de basculer entre AR et VR sans friction. Meta et Apple suivent des approches similaires côté traitement local.</p>
       </div>
-      <h3 class="proj-title">b1m3-bash</h3>
-      <p class="proj-desc">Scripting Bash — automatisation de tâches système, manipulation de fichiers et processus.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">Bash</span><span class="proj-tag">Linux</span>
-      </div>
-    </a>
 
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b3m1-langage-c" target="_blank" class="proj-card" data-cat="systeme">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.3);">Système</span>
-        <span class="proj-date">Oct 2024</span>
+      <!-- Freins -->
+      <div class="veille-block">
+        <div class="veille-block-label">Freins à l'adoption</div>
+        <ul class="veille-freins-list">
+          <li>Standards techniques incompatibles entre plateformes — interopérabilité limitée</li>
+          <li>Prix encore élevés (Vision Pro au-dessus de 3 000 €)</li>
+          <li>Poids et confort des casques (Quest 3 : 515 g — objectif Puffin : &lt;110 g)</li>
+          <li>Cybersickness et fatigue visuelle sur les longues sessions</li>
+          <li>Échec de Microsoft Mesh : adoption lente des espaces collaboratifs 3D</li>
+        </ul>
       </div>
-      <h3 class="proj-title">b3m1-langage-c</h3>
-      <p class="proj-desc">Programmation en C — gestion de la mémoire, pointeurs, structures de données bas niveau.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">C</span><span class="proj-tag">Système</span>
-      </div>
-    </a>
 
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m9-scriptinglogs" target="_blank" class="proj-card" data-cat="systeme">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.3);">Système</span>
-        <span class="proj-date">Mar 2025</span>
+      <!-- Perspectives -->
+      <div class="veille-block">
+        <div class="veille-block-label">Perspectives à surveiller</div>
+        <ul class="veille-outlook">
+          <li>Passage du casque aux <strong style="color:var(--text);">lunettes légères</strong> comme prochain saut matériel</li>
+          <li>Montée en puissance de la <strong style="color:var(--text);">VR B2B</strong> face à un grand public encore hésitant</li>
+          <li>Convergence <strong style="color:var(--text);">VR + IA générative</strong> pour des environnements dynamiques en temps réel</li>
+          <li><strong style="color:var(--text);">Guerre des écosystèmes</strong> : Horizon OS vs Android XR vs visionOS</li>
+        </ul>
       </div>
-      <h3 class="proj-title">b1m9-scriptinglogs</h3>
-      <p class="proj-desc">Scripting pour l'analyse et la supervision de logs système — parsing et alertes automatiques.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">Bash</span><span class="proj-tag">ELK</span><span class="proj-tag">Logs</span>
-      </div>
-    </a>
 
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m10-powershell" target="_blank" class="proj-card" data-cat="systeme">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.3);">Système</span>
-        <span class="proj-date">Avr 2025</span>
-      </div>
-      <h3 class="proj-title">b1m10-powershell</h3>
-      <p class="proj-desc">Scripting PowerShell — administration Windows, automatisation et gestion des services.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">PowerShell</span><span class="proj-tag">Windows</span>
-      </div>
-    </a>
+      <p style="font-size:.62rem;color:var(--muted);font-family:'Space Mono',monospace;text-align:right;">Veille réalisée le 25 mai 2026 · Sources : Innowise, Geekosys, realite-virtuelle.com, VRX</p>
+    </div>
 
-    <!-- WEB -->
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m4-html-css" target="_blank" class="proj-card" data-cat="web">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(6,182,212,.15);color:#22d3ee;border-color:rgba(6,182,212,.3);">Web</span>
-        <span class="proj-date">Sep 2024</span>
+    <!-- LIVE FEED -->
+    <div class="veille-live">
+      <div class="live-box">
+        <div class="live-header">
+          <div class="live-dot"></div>
+          <span class="live-title">Flux en direct</span>
+          <span class="live-updated" id="liveUpdated">—</span>
+        </div>
+        <input class="live-search" id="liveSearch" type="text" placeholder="Rechercher...">
+        <div class="live-filters">
+          <button class="live-filter active" data-tag="all">Tous</button>
+          <button class="live-filter" data-tag="marche">Marché</button>
+          <button class="live-filter" data-tag="tech">Tech</button>
+          <button class="live-filter" data-tag="usage">Usage</button>
+          <button class="live-filter" data-tag="alerte">Alerte</button>
+        </div>
+        <div class="live-feed" id="liveFeed"></div>
+        <div class="live-footer">Mise à jour automatique toutes les 12 s</div>
       </div>
-      <h3 class="proj-title">b1m4-html-css</h3>
-      <p class="proj-desc">Fondamentaux HTML5 & CSS3 — mise en page, responsive design et animations CSS.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">HTML5</span><span class="proj-tag">CSS3</span>
-      </div>
-    </a>
-
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/ap-wordpress" target="_blank" class="proj-card" data-cat="web">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(6,182,212,.15);color:#22d3ee;border-color:rgba(6,182,212,.3);">Web</span>
-        <span class="proj-date">Sep 2024</span>
-      </div>
-      <h3 class="proj-title">ap-wordpress</h3>
-      <p class="proj-desc">Création et personnalisation d'un site WordPress — thèmes, plugins et gestion de contenu.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">WordPress</span><span class="proj-tag">PHP</span>
-      </div>
-    </a>
-
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m5-javascript" target="_blank" class="proj-card" data-cat="web">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(6,182,212,.15);color:#22d3ee;border-color:rgba(6,182,212,.3);">Web</span>
-        <span class="proj-date">Nov 2024</span>
-      </div>
-      <h3 class="proj-title">b1m5-Javascript</h3>
-      <p class="proj-desc">JavaScript ES6+ — manipulation du DOM, événements, fetch API et programmation asynchrone.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">JavaScript</span><span class="proj-tag">DOM</span>
-      </div>
-    </a>
-
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b3m2-http" target="_blank" class="proj-card" data-cat="web">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(6,182,212,.15);color:#22d3ee;border-color:rgba(6,182,212,.3);">Web</span>
-        <span class="proj-date">Jan 2025</span>
-      </div>
-      <h3 class="proj-title">b3m2-http</h3>
-      <p class="proj-desc">Protocole HTTP — requêtes, réponses, headers, méthodes REST et communication client-serveur.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">HTTP</span><span class="proj-tag">REST</span>
-      </div>
-    </a>
-
-    <!-- JAVA & POO -->
-    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b1m1-java-tu" target="_blank" class="proj-card" data-cat="java">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">Java</span>
-        <span class="proj-date">Jan 2025</span>
-      </div>
-      <h3 class="proj-title">b2m1-java-tu</h3>
-      <p class="proj-desc">Tests unitaires Java avec JUnit — TDD, assertions, couverture de code et qualité logicielle.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">Java</span><span class="proj-tag">JUnit</span><span class="proj-tag">TDD</span>
-      </div>
-    </a>
-
-    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m3-poo" target="_blank" class="proj-card" data-cat="java">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">Java</span>
-        <span class="proj-date">Fév 2025</span>
-      </div>
-      <h3 class="proj-title">b2m3-poo</h3>
-      <p class="proj-desc">Programmation Orientée Objet en Java — héritage, polymorphisme, interfaces et design patterns.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">Java</span><span class="proj-tag">POO</span>
-      </div>
-    </a>
-
-    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m4-arraylist" target="_blank" class="proj-card" data-cat="java">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">Java</span>
-        <span class="proj-date">Fév 2025</span>
-      </div>
-      <h3 class="proj-title">b2m4-ArrayList</h3>
-      <p class="proj-desc">Collections Java — ArrayList, manipulation de listes dynamiques et algorithmes de tri.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">Java</span><span class="proj-tag">Collections</span>
-      </div>
-    </a>
-
-    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m4-dictionnaire" target="_blank" class="proj-card" data-cat="java">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">Java</span>
-        <span class="proj-date">Mar 2025</span>
-      </div>
-      <h3 class="proj-title">b2m4-dictionnaire</h3>
-      <p class="proj-desc">Structure de données dictionnaire en Java — HashMap, recherche et gestion de paires clé-valeur.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">Java</span><span class="proj-tag">HashMap</span>
-      </div>
-    </a>
-
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/apm7-csharp" target="_blank" class="proj-card" data-cat="java">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.3);">C#</span>
-        <span class="proj-date">Fév 2025</span>
-      </div>
-      <h3 class="proj-title">apm7-csharp</h3>
-      <p class="proj-desc">Introduction au C# — syntaxe, POO .NET, et développement d'applications console.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">C#</span><span class="proj-tag">.NET</span>
-      </div>
-    </a>
-
-    <!-- BDD & API -->
-    <a href="https://gitlab.sio-aurillac.fr/2024-2026/b1m6-sql" target="_blank" class="proj-card" data-cat="bdd">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(124,58,237,.15);color:#a78bfa;border-color:rgba(124,58,237,.3);">BDD</span>
-        <span class="proj-date">Déc 2024</span>
-      </div>
-      <h3 class="proj-title">b1m6-SQL</h3>
-      <p class="proj-desc">Langage SQL — requêtes SELECT, jointures, agrégats, sous-requêtes et optimisation.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">SQL</span><span class="proj-tag">PostgreSQL</span>
-      </div>
-    </a>
-
-    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m5-nasa" target="_blank" class="proj-card" data-cat="bdd">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(124,58,237,.15);color:#a78bfa;border-color:rgba(124,58,237,.3);">API</span>
-        <span class="proj-date">Mar 2025</span>
-      </div>
-      <h3 class="proj-title">b2m5-nasa</h3>
-      <p class="proj-desc">Consommation de l'API NASA — récupération d'images astronomiques et données spatiales en temps réel.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">API REST</span><span class="proj-tag">NASA</span><span class="proj-tag">JS</span>
-      </div>
-    </a>
-
-    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b2m6-transacs" target="_blank" class="proj-card" data-cat="bdd">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(124,58,237,.15);color:#a78bfa;border-color:rgba(124,58,237,.3);">BDD</span>
-        <span class="proj-date">Avr 2025</span>
-      </div>
-      <h3 class="proj-title">b2m6-transacs</h3>
-      <p class="proj-desc">Transactions SQL — ACID, gestion de la concurrence, rollback et intégrité des données.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">SQL</span><span class="proj-tag">Transactions</span><span class="proj-tag">ACID</span>
-      </div>
-    </a>
-
-    <!-- DIVERS -->
-    <a href="https://gitlab.sio-aurillac.fr/scoquitte/ProjetTP" target="_blank" class="proj-card" data-cat="divers">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(236,72,153,.15);color:#f472b6;border-color:rgba(236,72,153,.3);">Perso</span>
-        <span class="proj-date">Fév 2025</span>
-      </div>
-      <h3 class="proj-title">ProjetTP</h3>
-      <p class="proj-desc">Projet personnel créé via l'API GitLab avec Postman — tests d'intégration et automatisation CI.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">Postman</span><span class="proj-tag">API GitLab</span>
-      </div>
-    </a>
-
-    <a href="https://gitlab.sio-aurillac.fr/24-26-slam/b3m12-revisions" target="_blank" class="proj-card" data-cat="divers">
-      <div class="proj-top">
-        <span class="proj-lang" style="background:rgba(236,72,153,.15);color:#f472b6;border-color:rgba(236,72,153,.3);">Révisions</span>
-        <span class="proj-date">2025</span>
-      </div>
-      <h3 class="proj-title">b3m12-revisions</h3>
-      <p class="proj-desc">Module de révisions consolidant les acquis de 2 ans de formation BTS SIO SLAM.</p>
-      <div class="proj-footer">
-        <span class="proj-tag">Full Stack</span><span class="proj-tag">BTS SIO</span>
-      </div>
-    </a>
+    </div>
 
   </div>
 </section>
 
-<style>
-.filter-btn{
-  padding:.4rem 1rem;font-family:'Space Mono',monospace;font-size:.68rem;
-  letter-spacing:.1em;text-transform:uppercase;
-  background:transparent;border:1px solid var(--border);
-  color:var(--muted);cursor:none;transition:all .25s;
-}
-.filter-btn:hover,.filter-btn.active{
-  border-color:var(--accent);color:var(--accent);
-  background:rgba(124,58,237,.1);
-}
-.projects-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:1rem;
-}
-.proj-card{
-  display:flex;flex-direction:column;
-  padding:1.5rem;border:1px solid var(--border);
-  background:var(--card);text-decoration:none;color:var(--text);
-  transition:all .3s;position:relative;overflow:hidden;
-}
-.proj-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(124,58,237,.05),transparent);
-  opacity:0;transition:.3s;
-}
-.proj-card:hover::before{opacity:1;}
-.proj-card:hover{
-  border-color:var(--accent);
-  transform:translateY(-3px);
-  box-shadow:0 15px 40px rgba(0,0,0,.5);
-}
-.proj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;}
-.proj-lang{
-  font-size:.6rem;font-family:'Space Mono',monospace;letter-spacing:.12em;
-  text-transform:uppercase;padding:.2rem .5rem;border:1px solid;
-}
-.proj-date{font-size:.65rem;color:var(--muted);font-family:'Space Mono',monospace;}
-.proj-title{font-size:.95rem;font-weight:700;margin-bottom:.5rem;font-family:'Space Mono',monospace;}
-.proj-desc{font-size:.82rem;color:var(--muted);line-height:1.6;flex:1;}
-.proj-footer{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:1rem;}
-.proj-tag{
-  font-size:.6rem;font-family:'Space Mono',monospace;
-  padding:.15rem .45rem;border:1px solid var(--border);color:var(--muted);
-}
-.proj-card.hidden{display:none;}
-</style>
-
-<script>
-(function(){
-  const btns=document.querySelectorAll('.filter-btn');
-  const cards=document.querySelectorAll('.proj-card');
-  btns.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      btns.forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      const cat=btn.dataset.cat;
-      cards.forEach(c=>{
-        c.classList.toggle('hidden', cat!=='all' && c.dataset.cat!==cat);
-      });
-    });
-  });
-})();
-</script>
-
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-inner">
-    <div class="section-label" style="justify-content:center;">05 — Contact</div>
+    <div class="section-label" style="justify-content:center;">07 — Contact</div>
     <h2>On travaille ensemble ?</h2>
     <p>Disponible pour des alternances, stages ou projets freelance. N'hésitez pas à me contacter.</p>
     <a href="mailto:samuelcoquitte0@gmail.com" class="contact-big">samuelcoquitte0@gmail.com</a>
-    
+    <div class="contact-links"><a href="tel:+33618309368" class="contact-link">📞 06 18 30 93 68</a></div>
   </div>
 </section>
 
@@ -993,46 +523,111 @@
 </footer>
 
 <script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('ring');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',e=>{
-    mx=e.clientX;my=e.clientY;
-    cursor.style.left=mx-6+'px';cursor.style.top=my-6+'px';
-  });
-  (function anim(){
-    rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
-    ring.style.left=rx-18+'px';ring.style.top=ry-18+'px';
-    requestAnimationFrame(anim);
-  })();
-  document.querySelectorAll('a,button,.btn').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{
-      cursor.style.transform='scale(2.5)';
-      ring.style.opacity='0';
-    });
-    el.addEventListener('mouseleave',()=>{
-      cursor.style.transform='scale(1)';
-      ring.style.opacity='.6';
-    });
-  });
+// ===== CURSOR =====
+const cursor=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx-6+'px';cursor.style.top=my-6+'px';});
+(function anim(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx-18+'px';ring.style.top=ry-18+'px';requestAnimationFrame(anim);})();
+document.querySelectorAll('a,button,.btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(2.5)';ring.style.opacity='0';});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform='scale(1)';ring.style.opacity='.6';});
+});
 
-  // Scroll reveal
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.style.opacity='1';
-        e.target.style.transform='translateY(0)';
-      }
-    });
-  },{threshold:.1});
+// ===== SCROLL REVEAL =====
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:.1});
+document.querySelectorAll('.skill-card,.edu-card,.stat,.exp-item,.interest,.veille-block,.v-stat,.vu-card').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition='opacity .6s, transform .6s';observer.observe(el);});
 
-  document.querySelectorAll('.skill-card,.edu-card,.stat,.exp-item,.interest').forEach(el=>{
-    el.style.opacity='0';
-    el.style.transform='translateY(30px)';
-    el.style.transition='opacity .6s, transform .6s';
-    observer.observe(el);
+// ===== PROJECT FILTER =====
+(function(){
+  const btns=document.querySelectorAll('.filter-btn');
+  const cards=document.querySelectorAll('.proj-card');
+  btns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      btns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat=btn.dataset.cat;
+      cards.forEach(c=>{c.classList.toggle('hidden',cat!=='all'&&c.dataset.cat!==cat);});
+    });
   });
+})();
+
+// ===== LIVE VEILLE FEED =====
+(function(){
+  const allItems=[
+    {tag:'tech',text:'<strong>Meta "Puffin"</strong> — lunettes &lt;110 g sous Horizon OS, suivi mains/yeux, sans contrôleurs. Lancement visé 2027.',time:'Il y a 2 min'},
+    {tag:'marche',text:'<strong>Marché AR/VR</strong> — 12 M de casques expédiés en 2024. Objectif 200 Md$ d\'ici 2030 (+22 %/an).',time:'Il y a 5 min'},
+    {tag:'usage',text:'<strong>Santé VR</strong> — marché estimé à 40 Md$ en 2026. Déploiements structurés en hôpitaux et universités.',time:'Il y a 8 min'},
+    {tag:'tech',text:'<strong>Apple Vision</strong> avec puce M5 et visionOS 26 — positionné comme remplaçant de l\'iPad Pro (1 500–2 000 €).',time:'Il y a 11 min'},
+    {tag:'alerte',text:'<strong>Microsoft Mesh</strong> arrêté — faute d\'adoption. Les espaces immersifs restent disponibles dans Teams.',time:'Il y a 14 min'},
+    {tag:'tech',text:'<strong>Samsung Galaxy XR</strong> — déploiement mondial en 2026. Android XR + Google Gemini pour analyse temps réel.',time:'Il y a 17 min'},
+    {tag:'usage',text:'<strong>Industrie</strong> — 8,3 M d\'unités VR B2B prévues en 2026 pour formation, simulation, maintenance assistée.',time:'Il y a 21 min'},
+    {tag:'marche',text:'<strong>USA</strong> — 35 % des livraisons mondiales de matériel VR et 40 % des solutions logicielles en 2025.',time:'Il y a 25 min'},
+    {tag:'tech',text:'<strong>Valve Steam Frame</strong> — successeur de l\'Index, PCVR puissant et flexible, disponible début 2026.',time:'Il y a 30 min'},
+    {tag:'alerte',text:'<strong>Interopérabilité</strong> — standards incompatibles entre plateformes (Horizon OS / Android XR / visionOS), frein majeur à l\'adoption.',time:'Il y a 35 min'},
+    {tag:'usage',text:'<strong>Éducation VR</strong> — apprentissage immersif, répétition illimitée sans risque. Forte croissance en formation pro.',time:'Il y a 40 min'},
+    {tag:'tech',text:'<strong>Pimax Crystal Super Micro-OLED</strong> — écrans 4K par œil, FoV 116°, rendu fovéal dynamique. Présenté au CES 2026.',time:'Il y a 45 min'},
+    {tag:'marche',text:'<strong>Quest 4 repoussé</strong> à fin 2026 — Meta priorise le projet Puffin pour concurrencer Apple sur le segment léger.',time:'Il y a 52 min'},
+    {tag:'usage',text:'<strong>Jeux & divertissement</strong> — toujours 1er marché en volume. Contenu immersif exclusif avec Disney et A24 (Meta).',time:'Il y a 58 min'},
+  ];
+
+  const feed=document.getElementById('liveFeed');
+  const search=document.getElementById('liveSearch');
+  const filters=document.querySelectorAll('.live-filter');
+  const updEl=document.getElementById('liveUpdated');
+  let activeTag='all', searchVal='', displayedCount=0;
+
+  function tagClass(t){return 'live-tag live-tag-'+t;}
+
+  function render(){
+    const filtered=allItems.filter(i=>{
+      const matchTag=activeTag==='all'||i.tag===activeTag;
+      const matchSearch=searchVal===''||i.text.toLowerCase().includes(searchVal.toLowerCase());
+      return matchTag&&matchSearch;
+    });
+    feed.innerHTML='';
+    filtered.forEach(item=>{
+      const div=document.createElement('div');
+      div.className='live-item';
+      div.innerHTML=`<div class="live-item-top"><span class="${tagClass(item.tag)}">${item.tag}</span><span class="live-time">${item.time}</span></div><p class="live-text">${item.text}</p>`;
+      feed.appendChild(div);
+    });
+    displayedCount=filtered.length;
+  }
+
+  function updateTime(){
+    const now=new Date();
+    updEl.textContent=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0')+':'+now.getSeconds().toString().padStart(2,'0');
+  }
+
+  filters.forEach(f=>{
+    f.addEventListener('click',()=>{
+      filters.forEach(x=>x.classList.remove('active'));
+      f.classList.add('active');
+      activeTag=f.dataset.tag;
+      render();
+    });
+  });
+  search.addEventListener('input',()=>{searchVal=search.value;render();});
+
+  // Simulate live: rotate newest item every 12s
+  let idx=0;
+  function pushLive(){
+    const item=allItems[idx%allItems.length];
+    item.time='À l\'instant';
+    // reset older times
+    allItems.forEach((it,i)=>{
+      if(i!==idx%allItems.length&&it.time==='À l\'instant') it.time='Il y a 1 min';
+    });
+    idx++;
+    render();
+    updateTime();
+  }
+
+  render();
+  updateTime();
+  setInterval(pushLive,12000);
+  setInterval(updateTime,1000);
+})();
 </script>
 </body>
 </html>
